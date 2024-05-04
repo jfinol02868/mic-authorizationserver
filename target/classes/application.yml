@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: mic-authorizationserver
+
+server:
+  port: 9000
+
+logging:
+  level:
+    org.springframework.security: trace
+
+
+#Mirar endpoints de seguridad
+#http://localhost:9000/.well-known/oauth-authorization-server
