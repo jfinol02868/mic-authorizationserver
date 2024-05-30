@@ -47,18 +47,18 @@ public class AuthorizationSecurityConfig {
         OAuth2AuthorizationServerConfiguration.applyDefaultSecurity(http);
         http.getConfigurer(OAuth2AuthorizationServerConfigurer.class)
                 .oidc(Customizer.withDefaults());
-        http.exceptionHandling((exceptions) -> exceptions
+        http.exceptionHandling(exceptions -> exceptions
                         .defaultAuthenticationEntryPointFor(
                                 new LoginUrlAuthenticationEntryPoint("/login"),
                                 new MediaTypeRequestMatcher(MediaType.TEXT_HTML)))
-                .oauth2ResourceServer((resourceServer) -> resourceServer.jwt(Customizer.withDefaults()));
+                .oauth2ResourceServer(resourceServer -> resourceServer.jwt(Customizer.withDefaults()));
         return http.build();
     }
 
     @Bean
     @Order(2)
     public SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
-        return  http.authorizeHttpRequests((authorize) -> authorize.anyRequest().authenticated())
+        return  http.authorizeHttpRequests(authorize -> authorize.anyRequest().authenticated())
                 .csrf(AbstractHttpConfigurer::disable)
                 .formLogin(Customizer.withDefaults()).build();
     }

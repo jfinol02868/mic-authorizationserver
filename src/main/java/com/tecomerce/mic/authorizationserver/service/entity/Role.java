@@ -13,6 +13,6 @@ public class Role {
 
     private String id;
     private String name;
-    private List<Authority> authorities;
+    private List<String> authorities;
 
 }

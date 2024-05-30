@@ -21,6 +21,10 @@ logging:
   level:
     org.springframework.security: trace
 
+app:
+  environment: DES
+  micro: AUTHORIZATION
+
 
 #Mirar endpoints de seguridad
 #http://localhost:9000/.well-known/oauth-authorization-server

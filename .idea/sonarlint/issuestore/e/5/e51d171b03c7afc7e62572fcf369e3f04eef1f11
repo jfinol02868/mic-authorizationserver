@@ -1,0 +1,7 @@
+
+j
+java:S1948"'Make "roles" transient or serializable.(ÿÎÌ“8³ñ•§ü1J$b3be77bf-519f-4e92-858f-792fe46415a5
+—
+java:S6204!"zReplace this usage of 'Stream.collect(Collectors.toList())' with 'Stream.toList()' and ensure that the list is unmodified.(ª™¨¹8ì›§ü1
+‹
+java:S1612 "HReplace this lambda with method reference 'SimpleGrantedAuthority::new'.(Ì²ä–8â÷§ü1J$8d8b6846-3f17-426c-9439-4462e3e69093

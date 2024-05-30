@@ -1,13 +1,29 @@
+server:
+  port: 9000
+
 spring:
   application:
     name: mic-authorizationserver
 
-server:
-  port: 9000
+  data:
+    mongodb:
+      database: product
+      username: ${MONGO_USER}
+      password: ${MONGO_PASSWORD}
+      host: ${MONGO_HOST}
+      port: 29870
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+
 
 logging:
   level:
     org.springframework.security: trace
+
+app:
+  environment: DES
+  micro: AUTHORIZATION
 
 
 #Mirar endpoints de seguridad

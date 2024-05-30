@@ -1,32 +1,22 @@
 package com.tecomerce.mic.authorizationserver.service.entity;
 
+import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
 
-public class Authority {
+
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+
+public class Authority implements GrantedAuthority {
 
     private String id;
+    private String code;
     private String name;
 
-    public Authority() {
-    }
-
-    public Authority(String id, String name) {
-        this.id = id;
-        this.name = name;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    @Override
+    public String getAuthority() {
+        return this.getName();
     }
 }
