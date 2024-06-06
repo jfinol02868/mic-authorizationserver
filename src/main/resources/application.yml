@@ -7,11 +7,12 @@ spring:
 
   data:
     mongodb:
-      database: product
+      #database: authorization
+      database: admin
       username: ${MONGO_USER}
       password: ${MONGO_PASSWORD}
-      host: ${MONGO_HOST}
-      port: 29870
+      host: localhost
+      port: 27018
   autoconfigure:
     exclude:
       - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration

@@ -9,5 +9,4 @@ public class MicAuthorizationserverApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(MicAuthorizationserverApplication.class, args);
 	}
-
 }
