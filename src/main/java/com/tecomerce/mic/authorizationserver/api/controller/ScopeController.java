@@ -18,7 +18,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/v1/scopes")
-@Tags(value = {@Tag(name = "Scopes Uri", description = "Scopes Uri API")})
+@Tags(value = {@Tag(name = "Scopes Uri", description = "Scopes API")})
 public class ScopeController implements ScopeApi {
 
     private final ScopeUseCase useCase;
