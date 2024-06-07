@@ -1,13 +1,13 @@
 package com.tecomerce.mic.authorizationserver.infrastructure.db.repository.impl;
 
 import com.tecomerce.mic.authorizationserver.domain.entity.ClientAuthenticationMethod;
+import com.tecomerce.mic.authorizationserver.domain.exception.EntityNotFoundException;
 import com.tecomerce.mic.authorizationserver.domain.repository.ClientAuthenticationMethodRepository;
 import com.tecomerce.mic.authorizationserver.infrastructure.db.document.ClientAuthenticationMethodDocument;
 import com.tecomerce.mic.authorizationserver.infrastructure.db.mapper.ClientAuthenticationMethodDocMapper;
 import com.tecomerce.mic.authorizationserver.infrastructure.db.repository.ClientAuthenticationMethodRepositoryAdapter;
 import com.tecomerce.mic.authorizationserver.infrastructure.util.DynamicFilterMap;
 import com.tecomerce.mic.authorizationserver.infrastructure.util.IdGenerator;
-import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.BeanUtils;
@@ -71,7 +71,7 @@ public class ClientAuthenticationMethodRepositoryImpl implements ClientAuthentic
     @Override
     @Transactional
     public ClientAuthenticationMethod findById(String id) {
-        return mapper.toEntity(repository.findById(id).orElseThrow(() -> new EntityNotFoundException("ClientAuthenticationMethod not found")));
+        return mapper.toEntity(repository.findById(id).orElseThrow(() -> new EntityNotFoundException(id)));
     }
 
     @Override

@@ -11,7 +11,7 @@ spring:
       username: ${MONGO_USER}
       password: ${MONGO_PASSWORD}
       host: ${MONGO_HOST}
-      port: 27018
+      port: 40912
   autoconfigure:
     exclude:
       - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
