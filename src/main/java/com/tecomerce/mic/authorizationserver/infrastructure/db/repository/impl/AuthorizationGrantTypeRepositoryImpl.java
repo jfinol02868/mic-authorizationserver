@@ -1,13 +1,13 @@
 package com.tecomerce.mic.authorizationserver.infrastructure.db.repository.impl;
 
 import com.tecomerce.mic.authorizationserver.domain.entity.AuthorizationGrantType;
+import com.tecomerce.mic.authorizationserver.domain.exception.EntityNotFoundException;
 import com.tecomerce.mic.authorizationserver.domain.repository.AuthorizationGrantTypeRepository;
 import com.tecomerce.mic.authorizationserver.infrastructure.db.document.AuthorizationGrantTypeDocument;
 import com.tecomerce.mic.authorizationserver.infrastructure.db.mapper.AuthorizationGrantTypeDocMapper;
 import com.tecomerce.mic.authorizationserver.infrastructure.db.repository.AuthorizationGrantTypeRepositoryAdapter;
 import com.tecomerce.mic.authorizationserver.infrastructure.util.DynamicFilterMap;
 import com.tecomerce.mic.authorizationserver.infrastructure.util.IdGenerator;
-import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.BeanUtils;
@@ -70,7 +70,7 @@ public class AuthorizationGrantTypeRepositoryImpl implements AuthorizationGrantT
     @Override
     @Transactional
     public AuthorizationGrantType findById(String id) {
-        return mapper.toEntity(repository.findById(id).orElseThrow(() -> new EntityNotFoundException("AuthorizationGrantType not found")));
+        return mapper.toEntity(repository.findById(id).orElseThrow(() -> new EntityNotFoundException(id)));
     }
 
     @Override

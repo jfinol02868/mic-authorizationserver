@@ -2,6 +2,7 @@ package com.tecomerce.mic.authorizationserver.infrastructure.db.repository.impl;
 
 import com.tecomerce.mic.authorizationserver.domain.entity.User;
 import com.tecomerce.mic.authorizationserver.domain.entity.UserDetail;
+import com.tecomerce.mic.authorizationserver.domain.exception.EntityNotFoundException;
 import com.tecomerce.mic.authorizationserver.domain.repository.RoleRepository;
 import com.tecomerce.mic.authorizationserver.domain.repository.UserDetailRepository;
 import com.tecomerce.mic.authorizationserver.domain.repository.UserRepository;
@@ -12,7 +13,6 @@ import com.tecomerce.mic.authorizationserver.infrastructure.db.repository.UserDe
 import com.tecomerce.mic.authorizationserver.infrastructure.db.repository.UserRepositoryAdapter;
 import com.tecomerce.mic.authorizationserver.infrastructure.util.DynamicFilterMap;
 import com.tecomerce.mic.authorizationserver.infrastructure.util.IdGenerator;
-import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
@@ -79,7 +79,7 @@ public class UserRepositoryImpl implements UserRepository, UserDetailRepository 
     @Override
     public User findById(String id) {
         return mapper.toEntity(repository.findById(id).orElseThrow(
-                () -> new EntityNotFoundException("Role not found")));
+                () -> new EntityNotFoundException(id)));
     }
 
     @Override
@@ -118,6 +118,6 @@ public class UserRepositoryImpl implements UserRepository, UserDetailRepository 
     public UserDetail findByUsername(String username) {
 
         return uDMapper.toEntity(uDRepository.findByUsername(username).orElseThrow(
-                () -> new EntityNotFoundException("User not found")));
+                () -> new EntityNotFoundException(username)));
     }
 }

@@ -23,13 +23,13 @@ public class ClientDTO {
     private String clientId;
     @Schema(description = "Client Secret", example = "secret")
     private String clientSecret;
-    @Schema(description = "Authentication Methods", example = "[\"authorization_code\", \"refresh_token\"], \"client_credentials\"")
+    @Schema(description = "Authentication Methods", example = "[\"AUTHORIZATION::CLIENTAUTHENTICATIONMETHOD::619FF8AE-749D-47BF-8A7C-CB0B7BE9D5B5::DES\"]")
     private List<String> authenticationMethods;
-    @Schema(description = "Authorization Grant Types", example = "[\"authorization_code\"]")
+    @Schema(description = "Authorization Grant Types", example = "[\"AUTHORIZATION::AUTHORIZATIONGRANTTYPE::F0E072C2-7097-41CE-8BAA-9325A722FE2D::DES\", \"AUTHORIZATION::AUTHORIZATIONGRANTTYPE::F0E072C2-7097-41CE-8BAA-9325A724FE2D::DES\", \"AUTHORIZATION::AUTHORIZATIONGRANTTYPE::F0E072C2-7097-41CE-8BAB-9325A722FE2D::DES\"]")
     private List<String> authorizationGrantTypes;
-    @Schema(description = "Redirect Uris", example = "[\"https://oauthdebugger.com/debug\"]")
+    @Schema(description = "Redirect Uris", example = "[\"AUTHORIZATION::REDIRECTURI::8E13F0AA-BF62-4E32-B49E-9CD8FE768636::DES\"]")
     private List<String> redirectUris;
-    @Schema(description = "Scopes", example = "openid")
+    @Schema(description = "Scopes", example = "[\"AUTHORIZATION::SCOPE::901ED8FD-55B6-4087-9BC1-DF3788F72714::DES\"]")
     private List<String> scopes;
     @Schema(description = "Require Proof Key", example = "false")
     private Boolean requireProofKey;

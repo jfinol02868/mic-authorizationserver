@@ -1,13 +1,13 @@
 package com.tecomerce.mic.authorizationserver.infrastructure.db.repository.impl;
 
 import com.tecomerce.mic.authorizationserver.domain.entity.RedirectUri;
+import com.tecomerce.mic.authorizationserver.domain.exception.EntityNotFoundException;
 import com.tecomerce.mic.authorizationserver.domain.repository.RedirectUriRepository;
 import com.tecomerce.mic.authorizationserver.infrastructure.db.document.RedirectUriDocument;
 import com.tecomerce.mic.authorizationserver.infrastructure.db.mapper.RedirectUriDocMapper;
 import com.tecomerce.mic.authorizationserver.infrastructure.db.repository.RedirectUriRepositoryAdapter;
 import com.tecomerce.mic.authorizationserver.infrastructure.util.DynamicFilterMap;
 import com.tecomerce.mic.authorizationserver.infrastructure.util.IdGenerator;
-import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.BeanUtils;
@@ -70,7 +70,7 @@ public class RedirectUriRepositoryImpl implements RedirectUriRepository {
     @Override
     @Transactional
     public RedirectUri findById(String id) {
-        return mapper.toEntity(repository.findById(id).orElseThrow(() -> new EntityNotFoundException("RedirectUri not found")));
+        return mapper.toEntity(repository.findById(id).orElseThrow(() -> new EntityNotFoundException(id)));
     }
 
     @Override

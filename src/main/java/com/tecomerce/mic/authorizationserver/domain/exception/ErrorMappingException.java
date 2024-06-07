@@ -1,4 +1,4 @@
 package com.tecomerce.mic.authorizationserver.domain.exception;
 
-public class ErrorMappingException extends RuntimeException {
+public class ErrorMappingException extends RuntimeException{
 }
