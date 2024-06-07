@@ -124,7 +124,7 @@ public interface RoleApi {
     }
 
 
-    @GetMapping("/rolesFilter")
+    @GetMapping("/filter")
     @Operation( operationId = "get-roles-filter", description = "Get roles by filter.")
     @ApiResponse(responseCode = "200", content = @Content(mediaType = MEDIA_TYPE,  array = @ArraySchema(schema = @Schema(implementation = RoleDTO.class))))
     @ApiResponse(responseCode = "401", content = @Content(mediaType = MEDIA_TYPE,  schema = @Schema(implementation = MessageResponseDTO.class)))
