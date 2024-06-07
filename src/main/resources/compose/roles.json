@@ -1,0 +1,13 @@
+db.auth('autorization_user', '&G4TeKZVg$@S4WR2kkW8f');
+db = db.getSiblingDB('db_authorization');
+
+db.collection.insertMany([
+{
+  _id: "AUTHORIZATION::ROLE::8A94D4C3-4F6C-4A9F-B9E1-1234567890AB::DES",
+  nombre: 'ROLE_USER'
+},
+{
+  _id: "AUTHORIZATION::ROLE::9A94D4C3-4F6C-4A9F-B9E1-1234567890AB::DES",
+  nombre: 'ROLE_ADMIN'
+}
+]);
