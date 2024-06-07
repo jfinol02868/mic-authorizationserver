@@ -125,7 +125,7 @@ public interface UserApi {
     }
 
 
-    @GetMapping("/usersFilter")
+    @GetMapping("/filter")
     @Operation( operationId = "get-users-filter", description = "Get users by filter.")
     @ApiResponse(responseCode = "200", content = @Content(mediaType = MEDIA_TYPE,  array = @ArraySchema(schema = @Schema(implementation = UserDTO.class))))
     @ApiResponse(responseCode = "401", content = @Content(mediaType = MEDIA_TYPE,  schema = @Schema(implementation = MessageResponseDTO.class)))
@@ -139,6 +139,4 @@ public interface UserApi {
             @RequestParam(required = false, defaultValue = "createAt") String... sortProperties) {
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
     }
-
-
 }
