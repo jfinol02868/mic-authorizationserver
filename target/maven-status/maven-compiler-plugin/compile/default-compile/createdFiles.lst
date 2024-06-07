@@ -37,6 +37,7 @@ com\tecomerce\mic\authorizationserver\infrastructure\db\mapper\UserDetailDocMapp
 com\tecomerce\mic\authorizationserver\infrastructure\db\repository\impl\ClientRepositoryImpl.class
 com\tecomerce\mic\authorizationserver\infrastructure\util\DynamicFilterMap.class
 com\tecomerce\mic\authorizationserver\infrastructure\db\document\ScopeDocument$ScopeDocumentBuilder.class
+com\tecomerce\mic\authorizationserver\domain\enums\MessageEnum.class
 com\tecomerce\mic\authorizationserver\domain\entity\Scope$ScopeBuilder.class
 com\tecomerce\mic\authorizationserver\domain\entity\ClientDetail.class
 com\tecomerce\mic\authorizationserver\domain\repository\RoleRepository.class
@@ -48,6 +49,7 @@ com\tecomerce\mic\authorizationserver\application\usecase\impl\UserUseCaseImpl.c
 com\tecomerce\mic\authorizationserver\infrastructure\db\document\UserDocument$UserDocumentBuilder.class
 com\tecomerce\mic\authorizationserver\domain\entity\User.class
 com\tecomerce\mic\authorizationserver\api\service\dto\ClientDetailDTO.class
+com\tecomerce\mic\authorizationserver\api\controller\GlobalControllerAdvice.class
 com\tecomerce\mic\authorizationserver\infrastructure\db\document\ClientDetailDocument$ClientDetailDocumentBuilder.class
 com\tecomerce\mic\authorizationserver\api\service\AuthorizationGrantTypeApi.class
 com\tecomerce\mic\authorizationserver\api\controller\ClientController.class
@@ -118,6 +120,7 @@ com\tecomerce\mic\authorizationserver\application\usecase\ClientUseCase.class
 com\tecomerce\mic\authorizationserver\infrastructure\db\mapper\ClientDocMapper.class
 com\tecomerce\mic\authorizationserver\application\usecase\BaseUseCase.class
 com\tecomerce\mic\authorizationserver\domain\entity\AuthorizationGrantType$AuthorizationGrantTypeBuilder.class
+com\tecomerce\mic\authorizationserver\domain\exception\EntityNotFoundException.class
 com\tecomerce\mic\authorizationserver\api\service\dto\AuthorizationGrantTypeDTO$AuthorizationGrantTypeDTOBuilder.class
 com\tecomerce\mic\authorizationserver\api\service\ScopeApi.class
 com\tecomerce\mic\authorizationserver\infrastructure\db\mapper\RedirectUriDocMapperImpl.class

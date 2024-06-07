@@ -7,12 +7,11 @@ spring:
 
   data:
     mongodb:
-      #database: authorization
       database: authorization
       username: ${MONGO_USER}
       password: ${MONGO_PASSWORD}
-      host: localhost
-      port: 27018
+      host: ${MONGO_HOST}
+      port: 40912
   autoconfigure:
     exclude:
       - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
@@ -25,7 +24,3 @@ logging:
 app:
   environment: DES
   micro: AUTHORIZATION
-
-
-#Mirar endpoints de seguridad
-#http://localhost:9000/.well-known/oauth-authorization-server

@@ -70,8 +70,10 @@ C:\repository\mic-authorizationserver\src\main\java\com\tecomerce\mic\authorizat
 C:\repository\mic-authorizationserver\src\main\java\com\tecomerce\mic\authorizationserver\infrastructure\db\document\ClientDetailDocument.java
 C:\repository\mic-authorizationserver\src\main\java\com\tecomerce\mic\authorizationserver\domain\repository\RoleRepository.java
 C:\repository\mic-authorizationserver\src\main\java\com\tecomerce\mic\authorizationserver\domain\entity\User.java
+C:\repository\mic-authorizationserver\src\main\java\com\tecomerce\mic\authorizationserver\domain\enums\MessageEnum.java
 C:\repository\mic-authorizationserver\src\main\java\com\tecomerce\mic\authorizationserver\api\service\dto\ClientDTO.java
 C:\repository\mic-authorizationserver\src\main\java\com\tecomerce\mic\authorizationserver\infrastructure\db\document\RedirectUriDocument.java
+C:\repository\mic-authorizationserver\src\main\java\com\tecomerce\mic\authorizationserver\api\controller\GlobalControllerAdvice.java
 C:\repository\mic-authorizationserver\src\main\java\com\tecomerce\mic\authorizationserver\application\usecase\AuthorizationGrantTypeUseCase.java
 C:\repository\mic-authorizationserver\src\main\java\com\tecomerce\mic\authorizationserver\infrastructure\db\repository\impl\UserRepositoryImpl.java
 C:\repository\mic-authorizationserver\src\main\java\com\tecomerce\mic\authorizationserver\application\usecase\ClientAuthenticationMethodUseCase.java
@@ -85,6 +87,7 @@ C:\repository\mic-authorizationserver\src\main\java\com\tecomerce\mic\authorizat
 C:\repository\mic-authorizationserver\src\main\java\com\tecomerce\mic\authorizationserver\infrastructure\db\repository\AuthorizationGrantTypeRepositoryAdapter.java
 C:\repository\mic-authorizationserver\src\main\java\com\tecomerce\mic\authorizationserver\api\service\dto\ClientDetailDTO.java
 C:\repository\mic-authorizationserver\src\main\java\com\tecomerce\mic\authorizationserver\api\mapper\AuthorizationGrantTypeDTOMapper.java
+C:\repository\mic-authorizationserver\src\main\java\com\tecomerce\mic\authorizationserver\domain\exception\EntityNotFoundException.java
 C:\repository\mic-authorizationserver\src\main\java\com\tecomerce\mic\authorizationserver\api\service\dto\UserDetailDTO.java
 C:\repository\mic-authorizationserver\src\main\java\com\tecomerce\mic\authorizationserver\application\usecase\BaseUseCase.java
 C:\repository\mic-authorizationserver\src\main\java\com\tecomerce\mic\authorizationserver\domain\entity\ClientDetail.java

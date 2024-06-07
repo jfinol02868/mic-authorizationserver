@@ -1,13 +1,13 @@
 package com.tecomerce.mic.authorizationserver.infrastructure.db.repository.impl;
 
 import com.tecomerce.mic.authorizationserver.domain.entity.Scope;
+import com.tecomerce.mic.authorizationserver.domain.exception.EntityNotFoundException;
 import com.tecomerce.mic.authorizationserver.domain.repository.ScopeRepository;
 import com.tecomerce.mic.authorizationserver.infrastructure.db.document.ScopeDocument;
 import com.tecomerce.mic.authorizationserver.infrastructure.db.mapper.ScopeDocMapper;
 import com.tecomerce.mic.authorizationserver.infrastructure.db.repository.ScopeRepositoryAdapter;
 import com.tecomerce.mic.authorizationserver.infrastructure.util.DynamicFilterMap;
 import com.tecomerce.mic.authorizationserver.infrastructure.util.IdGenerator;
-import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.BeanUtils;
@@ -70,7 +70,7 @@ public class ScopeRepositoryImpl implements ScopeRepository {
     @Override
     @Transactional
     public Scope findById(String id) {
-        return mapper.toEntity(repository.findById(id).orElseThrow(() -> new EntityNotFoundException("Scope not found")));
+        return mapper.toEntity(repository.findById(id).orElseThrow(() -> new EntityNotFoundException(id)));
     }
 
     @Override

@@ -2,6 +2,7 @@ package com.tecomerce.mic.authorizationserver.infrastructure.db.repository.impl;
 
 import com.tecomerce.mic.authorizationserver.domain.entity.Client;
 import com.tecomerce.mic.authorizationserver.domain.entity.ClientDetail;
+import com.tecomerce.mic.authorizationserver.domain.exception.EntityNotFoundException;
 import com.tecomerce.mic.authorizationserver.domain.repository.ClientDetailRepository;
 import com.tecomerce.mic.authorizationserver.domain.repository.ClientRepository;
 import com.tecomerce.mic.authorizationserver.infrastructure.db.document.ClientDetailDocument;
@@ -12,7 +13,6 @@ import com.tecomerce.mic.authorizationserver.infrastructure.db.repository.Client
 import com.tecomerce.mic.authorizationserver.infrastructure.db.repository.ClientRepositoryAdapter;
 import com.tecomerce.mic.authorizationserver.infrastructure.util.DynamicFilterMap;
 import com.tecomerce.mic.authorizationserver.infrastructure.util.IdGenerator;
-import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.BeanUtils;
@@ -78,7 +78,7 @@ public class ClientRepositoryImpl implements ClientRepository, ClientDetailRepos
     @Override
     @Transactional
     public Client findById(String id) {
-        return mapper.toEntity(repository.findById(id).orElseThrow(() -> new EntityNotFoundException("Client not found")));
+        return mapper.toEntity(repository.findById(id).orElseThrow(() -> new EntityNotFoundException(id)));
     }
 
     @Override
@@ -117,7 +117,8 @@ public class ClientRepositoryImpl implements ClientRepository, ClientDetailRepos
 
     @Override
     public ClientDetail getClientDetail(String id) {
-        ClientDetailDocument clientDetailDocument = cDRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Client not found"));
+        ClientDetailDocument clientDetailDocument = cDRepository.findById(id).orElseThrow(
+                () -> new EntityNotFoundException(id));
         return cDMapper.toEntity(clientDetailDocument);
     }
 }
