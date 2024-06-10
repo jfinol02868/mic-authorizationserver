@@ -4,9 +4,11 @@ C:\repository\mic-authorizationserver\src\main\java\com\tecomerce\mic\authorizat
 C:\repository\mic-authorizationserver\src\main\java\com\tecomerce\mic\authorizationserver\api\service\dto\ScopeDTO.java
 C:\repository\mic-authorizationserver\src\main\java\com\tecomerce\mic\authorizationserver\infrastructure\db\repository\ScopeRepositoryAdapter.java
 C:\repository\mic-authorizationserver\src\main\java\com\tecomerce\mic\authorizationserver\infrastructure\db\repository\RoleRepositoryAdapter.java
+C:\repository\mic-authorizationserver\src\main\java\com\tecomerce\mic\authorizationserver\application\usecase\impl\UserService.java
 C:\repository\mic-authorizationserver\src\main\java\com\tecomerce\mic\authorizationserver\api\mapper\ClientDetailDTOMapper.java
 C:\repository\mic-authorizationserver\src\main\java\com\tecomerce\mic\authorizationserver\api\mapper\ClientDTOMapper.java
 C:\repository\mic-authorizationserver\src\main\java\com\tecomerce\mic\authorizationserver\domain\entity\Role.java
+C:\repository\mic-authorizationserver\src\main\java\com\tecomerce\mic\authorizationserver\domain\enums\RoleName.java
 C:\repository\mic-authorizationserver\src\main\java\com\tecomerce\mic\authorizationserver\infrastructure\db\repository\ClientRepositoryAdapter.java
 C:\repository\mic-authorizationserver\src\main\java\com\tecomerce\mic\authorizationserver\infrastructure\db\document\ClientDocument.java
 C:\repository\mic-authorizationserver\src\main\java\com\tecomerce\mic\authorizationserver\infrastructure\db\document\UserDetailDocument.java
@@ -38,6 +40,7 @@ C:\repository\mic-authorizationserver\src\main\java\com\tecomerce\mic\authorizat
 C:\repository\mic-authorizationserver\src\main\java\com\tecomerce\mic\authorizationserver\domain\repository\BaseRepository.java
 C:\repository\mic-authorizationserver\src\main\java\com\tecomerce\mic\authorizationserver\application\usecase\UserDetailUseCase.java
 C:\repository\mic-authorizationserver\src\main\java\com\tecomerce\mic\authorizationserver\domain\repository\ClientAuthenticationMethodRepository.java
+C:\repository\mic-authorizationserver\src\main\java\com\tecomerce\mic\authorizationserver\application\configuration\SecurityConfig.java
 C:\repository\mic-authorizationserver\src\main\java\com\tecomerce\mic\authorizationserver\infrastructure\db\mapper\RedirectUriDocMapper.java
 C:\repository\mic-authorizationserver\src\main\java\com\tecomerce\mic\authorizationserver\api\service\ClientAuthenticationMethodApi.java
 C:\repository\mic-authorizationserver\src\main\java\com\tecomerce\mic\authorizationserver\api\service\UseDetailApi.java
@@ -94,6 +97,7 @@ C:\repository\mic-authorizationserver\src\main\java\com\tecomerce\mic\authorizat
 C:\repository\mic-authorizationserver\src\main\java\com\tecomerce\mic\authorizationserver\infrastructure\db\mapper\AuthorizationGrantTypeDocMapper.java
 C:\repository\mic-authorizationserver\src\main\java\com\tecomerce\mic\authorizationserver\api\service\UserApi.java
 C:\repository\mic-authorizationserver\src\main\java\com\tecomerce\mic\authorizationserver\api\service\dto\RedirectUriDTO.java
+C:\repository\mic-authorizationserver\src\main\java\com\tecomerce\mic\authorizationserver\application\usecase\impl\UserDetailServiceImpl.java
 C:\repository\mic-authorizationserver\src\main\java\com\tecomerce\mic\authorizationserver\infrastructure\db\repository\impl\ScopeRepositoryImpl.java
 C:\repository\mic-authorizationserver\src\main\java\com\tecomerce\mic\authorizationserver\infrastructure\db\repository\impl\ClientRepositoryImpl.java
 C:\repository\mic-authorizationserver\src\main\java\com\tecomerce\mic\authorizationserver\infrastructure\db\repository\UserDetailRepositoryAdapter.java
@@ -110,5 +114,6 @@ C:\repository\mic-authorizationserver\src\main\java\com\tecomerce\mic\authorizat
 C:\repository\mic-authorizationserver\src\main\java\com\tecomerce\mic\authorizationserver\api\controller\UserController.java
 C:\repository\mic-authorizationserver\src\main\java\com\tecomerce\mic\authorizationserver\api\service\ClientApi.java
 C:\repository\mic-authorizationserver\src\main\java\com\tecomerce\mic\authorizationserver\api\controller\RedirectUriController.java
+C:\repository\mic-authorizationserver\src\main\java\com\tecomerce\mic\authorizationserver\application\configuration\BeansConfig.java
 C:\repository\mic-authorizationserver\src\main\java\com\tecomerce\mic\authorizationserver\domain\repository\ScopeRepository.java
 C:\repository\mic-authorizationserver\src\main\java\com\tecomerce\mic\authorizationserver\application\usecase\RoleUseCase.java

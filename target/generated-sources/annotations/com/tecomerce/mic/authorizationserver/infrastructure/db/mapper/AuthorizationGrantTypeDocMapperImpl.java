@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-06-07T19:16:25+0200",
+    date = "2024-06-10T13:57:00+0200",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 17.0.11 (Eclipse Adoptium)"
 )
 @Component
@@ -24,7 +24,7 @@ public class AuthorizationGrantTypeDocMapperImpl implements AuthorizationGrantTy
         AuthorizationGrantType.AuthorizationGrantTypeBuilder authorizationGrantType = AuthorizationGrantType.builder();
 
         authorizationGrantType.id( document.getId() );
-        authorizationGrantType.name( document.getName() );
+        authorizationGrantType.value( document.getValue() );
         authorizationGrantType.description( document.getDescription() );
 
         return authorizationGrantType.build();
@@ -39,7 +39,7 @@ public class AuthorizationGrantTypeDocMapperImpl implements AuthorizationGrantTy
         AuthorizationGrantTypeDocument.AuthorizationGrantTypeDocumentBuilder authorizationGrantTypeDocument = AuthorizationGrantTypeDocument.builder();
 
         authorizationGrantTypeDocument.id( entity.getId() );
-        authorizationGrantTypeDocument.name( entity.getName() );
+        authorizationGrantTypeDocument.value( entity.getValue() );
         authorizationGrantTypeDocument.description( entity.getDescription() );
 
         return authorizationGrantTypeDocument.build();

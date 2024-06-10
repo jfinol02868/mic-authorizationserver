@@ -13,6 +13,7 @@ com\tecomerce\mic\authorizationserver\infrastructure\db\repository\ClientDetailR
 com\tecomerce\mic\authorizationserver\application\usecase\AuthorizationGrantTypeUseCase.class
 com\tecomerce\mic\authorizationserver\api\mapper\ClientDTOMapper.class
 com\tecomerce\mic\authorizationserver\infrastructure\db\document\RoleDocument.class
+com\tecomerce\mic\authorizationserver\application\usecase\impl\UserDetailServiceImpl.class
 com\tecomerce\mic\authorizationserver\api\service\dto\ClientDetailDTO$ClientDetailDTOBuilder.class
 com\tecomerce\mic\authorizationserver\infrastructure\db\mapper\ClientAuthenticationMethodDocMapperImpl.class
 com\tecomerce\mic\authorizationserver\infrastructure\db\repository\impl\UserRepositoryImpl.class
@@ -63,6 +64,7 @@ com\tecomerce\mic\authorizationserver\infrastructure\db\mapper\UserDetailDocMapp
 com\tecomerce\mic\authorizationserver\api\service\ClientAuthenticationMethodApi.class
 com\tecomerce\mic\authorizationserver\api\service\dto\ClientAuthenticationMethodDTO$ClientAuthenticationMethodDTOBuilder.class
 com\tecomerce\mic\authorizationserver\api\service\dto\ScopeDTO$ScopeDTOBuilder.class
+com\tecomerce\mic\authorizationserver\domain\enums\RoleName.class
 com\tecomerce\mic\authorizationserver\domain\util\MapperUtil.class
 com\tecomerce\mic\authorizationserver\domain\entity\RedirectUri$RedirectUriBuilder.class
 com\tecomerce\mic\authorizationserver\api\service\RedirectUriApi.class
@@ -74,6 +76,7 @@ com\tecomerce\mic\authorizationserver\infrastructure\db\repository\ScopeReposito
 com\tecomerce\mic\authorizationserver\infrastructure\db\repository\UserRepositoryAdapter.class
 com\tecomerce\mic\authorizationserver\infrastructure\db\repository\ClientRepositoryAdapter.class
 com\tecomerce\mic\authorizationserver\api\mapper\UserDetailDtoMapper.class
+com\tecomerce\mic\authorizationserver\application\configuration\SecurityConfig.class
 com\tecomerce\mic\authorizationserver\application\usecase\ClientDetailUseCase.class
 com\tecomerce\mic\authorizationserver\infrastructure\db\document\ClientAuthenticationMethodDocument$ClientAuthenticationMethodDocumentBuilder.class
 com\tecomerce\mic\authorizationserver\domain\repository\ClientRepository.class
@@ -125,6 +128,7 @@ com\tecomerce\mic\authorizationserver\api\service\dto\AuthorizationGrantTypeDTO$
 com\tecomerce\mic\authorizationserver\api\service\ScopeApi.class
 com\tecomerce\mic\authorizationserver\infrastructure\db\mapper\RedirectUriDocMapperImpl.class
 com\tecomerce\mic\authorizationserver\domain\entity\User$UserBuilder.class
+com\tecomerce\mic\authorizationserver\application\usecase\impl\UserService.class
 com\tecomerce\mic\authorizationserver\infrastructure\db\mapper\ClientDetailDocMapperImpl.class
 com\tecomerce\mic\authorizationserver\api\mapper\ClientDetailDTOMapperImpl.class
 com\tecomerce\mic\authorizationserver\api\controller\ClientAuthenticationMethodController.class
@@ -136,6 +140,7 @@ com\tecomerce\mic\authorizationserver\infrastructure\db\document\RedirectUriDocu
 com\tecomerce\mic\authorizationserver\api\mapper\ClientDetailDTOMapper.class
 com\tecomerce\mic\authorizationserver\application\usecase\impl\ScopeUseCaseImpl.class
 com\tecomerce\mic\authorizationserver\infrastructure\db\mapper\ScopeDocMapper.class
+com\tecomerce\mic\authorizationserver\application\configuration\BeansConfig.class
 com\tecomerce\mic\authorizationserver\infrastructure\db\mapper\RoleDocMapperImpl.class
 com\tecomerce\mic\authorizationserver\application\usecase\impl\AuthorizationGrantTypeUseCaseImpl.class
 com\tecomerce\mic\authorizationserver\application\usecase\RoleUseCase.class

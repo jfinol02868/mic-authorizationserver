@@ -1,6 +1,18 @@
 server:
   port: 9000
 
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /web/app/swagger.html
+    operationsSorter: method
+    docExpansion: none
+    tagsSorter: alpha
+    urls:
+      - url: /api-docs
+        name: API Documentation
+
 spring:
   application:
     name: mic-authorizationserver
@@ -15,7 +27,6 @@ spring:
   autoconfigure:
     exclude:
       - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
-
 
 logging:
   level:

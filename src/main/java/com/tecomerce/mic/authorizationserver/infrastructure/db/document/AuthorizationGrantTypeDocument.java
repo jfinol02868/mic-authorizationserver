@@ -22,6 +22,6 @@ public class AuthorizationGrantTypeDocument {
         @Id
         private String id;
         @Indexed(unique = true)
-        private String name;
+        private String value;
         private String description;
 }

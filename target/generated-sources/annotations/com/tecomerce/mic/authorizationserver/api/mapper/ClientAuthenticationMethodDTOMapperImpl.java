@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-06-07T19:16:25+0200",
+    date = "2024-06-10T13:57:00+0200",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 17.0.11 (Eclipse Adoptium)"
 )
 @Component
@@ -24,7 +24,7 @@ public class ClientAuthenticationMethodDTOMapperImpl implements ClientAuthentica
         ClientAuthenticationMethod.ClientAuthenticationMethodBuilder clientAuthenticationMethod = ClientAuthenticationMethod.builder();
 
         clientAuthenticationMethod.id( dto.getId() );
-        clientAuthenticationMethod.name( dto.getName() );
+        clientAuthenticationMethod.value( dto.getValue() );
         clientAuthenticationMethod.description( dto.getDescription() );
 
         return clientAuthenticationMethod.build();
@@ -39,7 +39,7 @@ public class ClientAuthenticationMethodDTOMapperImpl implements ClientAuthentica
         ClientAuthenticationMethodDTO.ClientAuthenticationMethodDTOBuilder clientAuthenticationMethodDTO = ClientAuthenticationMethodDTO.builder();
 
         clientAuthenticationMethodDTO.id( entity.getId() );
-        clientAuthenticationMethodDTO.name( entity.getName() );
+        clientAuthenticationMethodDTO.value( entity.getValue() );
         clientAuthenticationMethodDTO.description( entity.getDescription() );
 
         return clientAuthenticationMethodDTO.build();
