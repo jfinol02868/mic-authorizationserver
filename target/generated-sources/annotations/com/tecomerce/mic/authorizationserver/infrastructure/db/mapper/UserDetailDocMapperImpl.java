@@ -1,6 +1,5 @@
 package com.tecomerce.mic.authorizationserver.infrastructure.db.mapper;
 
-import com.tecomerce.mic.authorizationserver.api.service.dto.RoleDTO;
 import com.tecomerce.mic.authorizationserver.domain.entity.Role;
 import com.tecomerce.mic.authorizationserver.domain.entity.UserDetail;
 import com.tecomerce.mic.authorizationserver.infrastructure.db.document.UserDetailDocument;
@@ -11,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-06-07T19:16:25+0200",
+    date = "2024-06-10T13:57:00+0200",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 17.0.11 (Eclipse Adoptium)"
 )
 @Component
@@ -28,7 +27,10 @@ public class UserDetailDocMapperImpl implements UserDetailDocMapper {
         userDetail.id( document.getId() );
         userDetail.username( document.getUsername() );
         userDetail.password( document.getPassword() );
-        userDetail.roles( roleListToRoleDTOList( document.getRoles() ) );
+        List<Role> list = document.getRoles();
+        if ( list != null ) {
+            userDetail.roles( new ArrayList<Role>( list ) );
+        }
         userDetail.expired( document.isExpired() );
         userDetail.locked( document.isLocked() );
         userDetail.credentialsExpired( document.isCredentialsExpired() );
@@ -48,7 +50,10 @@ public class UserDetailDocMapperImpl implements UserDetailDocMapper {
         userDetailDocument.id( entity.getId() );
         userDetailDocument.username( entity.getUsername() );
         userDetailDocument.password( entity.getPassword() );
-        userDetailDocument.roles( roleDTOListToRoleList( entity.getRoles() ) );
+        List<Role> list = entity.getRoles();
+        if ( list != null ) {
+            userDetailDocument.roles( new ArrayList<Role>( list ) );
+        }
         userDetailDocument.expired( entity.isExpired() );
         userDetailDocument.locked( entity.isLocked() );
         userDetailDocument.credentialsExpired( entity.isCredentialsExpired() );
@@ -83,57 +88,5 @@ public class UserDetailDocMapperImpl implements UserDetailDocMapper {
         }
 
         return list;
-    }
-
-    protected RoleDTO roleToRoleDTO(Role role) {
-        if ( role == null ) {
-            return null;
-        }
-
-        RoleDTO.RoleDTOBuilder roleDTO = RoleDTO.builder();
-
-        roleDTO.id( role.getId() );
-        roleDTO.name( role.getName() );
-
-        return roleDTO.build();
-    }
-
-    protected List<RoleDTO> roleListToRoleDTOList(List<Role> list) {
-        if ( list == null ) {
-            return null;
-        }
-
-        List<RoleDTO> list1 = new ArrayList<RoleDTO>( list.size() );
-        for ( Role role : list ) {
-            list1.add( roleToRoleDTO( role ) );
-        }
-
-        return list1;
-    }
-
-    protected Role roleDTOToRole(RoleDTO roleDTO) {
-        if ( roleDTO == null ) {
-            return null;
-        }
-
-        Role.RoleBuilder role = Role.builder();
-
-        role.id( roleDTO.getId() );
-        role.name( roleDTO.getName() );
-
-        return role.build();
-    }
-
-    protected List<Role> roleDTOListToRoleList(List<RoleDTO> list) {
-        if ( list == null ) {
-            return null;
-        }
-
-        List<Role> list1 = new ArrayList<Role>( list.size() );
-        for ( RoleDTO roleDTO : list ) {
-            list1.add( roleDTOToRole( roleDTO ) );
-        }
-
-        return list1;
     }
 }

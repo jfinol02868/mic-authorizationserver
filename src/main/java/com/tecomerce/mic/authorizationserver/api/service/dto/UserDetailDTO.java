@@ -25,6 +25,7 @@ public class UserDetailDTO {
     @Schema(description = "User name.", example = "john_doe")
     private String username;
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @NotNull(message = "The password cannot be null or empty.")
     @Schema(description = "User password.", example = "password123")
     private String password;

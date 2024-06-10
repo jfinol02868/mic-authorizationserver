@@ -18,5 +18,5 @@ public class RoleDTO {
 
     @NotNull(message = "The name cannot be null or empty.")
     @Schema(description = "Role name.", example = "ROLE_USER")
-    private String name;
+    private String role;
 }
