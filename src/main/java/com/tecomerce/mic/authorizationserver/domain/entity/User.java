@@ -21,4 +21,8 @@ public class User {
     private boolean locked = false;
     private boolean credentialsExpired = false;
     private boolean disabled = false;
+
+    public String trimPassword() {
+        return this.password.trim();
+    }
 }

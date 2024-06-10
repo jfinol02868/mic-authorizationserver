@@ -14,6 +14,6 @@ import lombok.NoArgsConstructor;
 public class ClientAuthenticationMethod {
 
         private String id;
-        private String name;
+        private String value;
         private String description;
 }

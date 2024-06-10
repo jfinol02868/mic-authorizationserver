@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-06-07T19:16:25+0200",
+    date = "2024-06-10T13:56:59+0200",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 17.0.11 (Eclipse Adoptium)"
 )
 @Component
@@ -24,7 +24,7 @@ public class AuthorizationGrantTypeDTOMapperImpl implements AuthorizationGrantTy
         AuthorizationGrantType.AuthorizationGrantTypeBuilder authorizationGrantType = AuthorizationGrantType.builder();
 
         authorizationGrantType.id( dto.getId() );
-        authorizationGrantType.name( dto.getName() );
+        authorizationGrantType.value( dto.getValue() );
         authorizationGrantType.description( dto.getDescription() );
 
         return authorizationGrantType.build();
@@ -39,7 +39,7 @@ public class AuthorizationGrantTypeDTOMapperImpl implements AuthorizationGrantTy
         AuthorizationGrantTypeDTO.AuthorizationGrantTypeDTOBuilder authorizationGrantTypeDTO = AuthorizationGrantTypeDTO.builder();
 
         authorizationGrantTypeDTO.id( entity.getId() );
-        authorizationGrantTypeDTO.name( entity.getName() );
+        authorizationGrantTypeDTO.value( entity.getValue() );
         authorizationGrantTypeDTO.description( entity.getDescription() );
 
         return authorizationGrantTypeDTO.build();

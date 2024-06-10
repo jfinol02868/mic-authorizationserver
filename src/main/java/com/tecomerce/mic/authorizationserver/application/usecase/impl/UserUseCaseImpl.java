@@ -8,6 +8,7 @@ import com.tecomerce.mic.authorizationserver.domain.repository.UserDetailReposit
 import com.tecomerce.mic.authorizationserver.domain.repository.UserRepository;
 import com.tecomerce.mic.authorizationserver.domain.util.MapperUtil;
 import lombok.AllArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,25 +19,39 @@ public class UserUseCaseImpl implements UserUseCase, UserDetailUseCase {
 
     private final MapperUtil filters;
     private final UserRepository repository;
+    private final PasswordEncoder passwordEncoder;
     private final UserDetailRepository uDRepository;
+
 
     @Override
     public User create(User entity) {
+        entity.trimPassword();
+        entity.setPassword(passwordEncoder.encode(entity.getPassword()));
         return repository.create(entity);
     }
 
     @Override
     public List<User> createAll(List<User> entities) {
+        entities.forEach(e -> {
+                    e.trimPassword();
+                    e.setPassword(passwordEncoder.encode(e.getPassword().trim()));
+                });
         return repository.createAll(entities);
     }
 
     @Override
     public User update(User entity, String id) {
+        entity.trimPassword();
+        entity.setPassword(passwordEncoder.encode(entity.getPassword()));
         return repository.update(entity, id);
     }
 
     @Override
     public List<User> updateAll(List<User> entities) {
+        entities.forEach(e -> {
+            e.trimPassword();
+            e.setPassword(passwordEncoder.encode(e.getPassword().trim()));
+        });
         return repository.updateAll(entities);
     }
 
