@@ -91,7 +91,7 @@ public class SecurityConfig {
     @Bean
     public AuthorizationServerSettings authorizationServerSettings(){
         //return AuthorizationServerSettings.builder().issuer("http://localhost:9000").build();
-        return AuthorizationServerSettings.builder().issuer("https://mic-authorizationserver-production.up.railway.app/").build();
+        return AuthorizationServerSettings.builder().issuer("https://mic-authorizationserver-production.up.railway.app").build();
     }
 
     @Bean
