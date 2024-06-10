@@ -5,13 +5,15 @@ springdoc:
   api-docs:
     path: /api-docs
   swagger-ui:
-    path: /web/app/swagger.html
+    path: /web/swagger.html
     operationsSorter: method
     docExpansion: none
     tagsSorter: alpha
     urls:
       - url: /api-docs
         name: API Documentation
+
+#/web/swagger-ui/index.html
 
 spring:
   application:
