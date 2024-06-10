@@ -34,7 +34,7 @@ public class UserUseCaseImpl implements UserUseCase, UserDetailUseCase {
     public List<User> createAll(List<User> entities) {
         entities.forEach(e -> {
                     e.trimPassword();
-                    e.setPassword(passwordEncoder.encode(e.getPassword().trim()));
+                    e.setPassword(passwordEncoder.encode(e.getPassword()));
                 });
         return repository.createAll(entities);
     }
@@ -50,7 +50,7 @@ public class UserUseCaseImpl implements UserUseCase, UserDetailUseCase {
     public List<User> updateAll(List<User> entities) {
         entities.forEach(e -> {
             e.trimPassword();
-            e.setPassword(passwordEncoder.encode(e.getPassword().trim()));
+            e.setPassword(passwordEncoder.encode(e.getPassword()));
         });
         return repository.updateAll(entities);
     }
