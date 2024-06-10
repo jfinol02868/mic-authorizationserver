@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.tags.Tags;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,6 +19,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
+@PreAuthorize("hasRole('ROLE_ADMIN')")
 @RequestMapping("/v1/clientAuthenticationMethod")
 @Tags(value = {@Tag(name = "Client Authentication Method", description = "Client Authentication Method API")})
 public class ClientAuthenticationMethodController implements ClientAuthenticationMethodApi {
