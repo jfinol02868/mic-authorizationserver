@@ -25,23 +25,33 @@ public class UserUseCaseImpl implements UserUseCase, UserDetailUseCase {
 
     @Override
     public User create(User entity) {
+        entity.trimPassword();
         entity.setPassword(passwordEncoder.encode(entity.getPassword()));
         return repository.create(entity);
     }
 
     @Override
     public List<User> createAll(List<User> entities) {
-        entities.forEach(e -> e.setPassword(passwordEncoder.encode(e.getPassword())));
+        entities.forEach(e -> {
+                    e.trimPassword();
+                    e.setPassword(passwordEncoder.encode(e.getPassword().trim()));
+                });
         return repository.createAll(entities);
     }
 
     @Override
     public User update(User entity, String id) {
+        entity.trimPassword();
+        entity.setPassword(passwordEncoder.encode(entity.getPassword()));
         return repository.update(entity, id);
     }
 
     @Override
     public List<User> updateAll(List<User> entities) {
+        entities.forEach(e -> {
+            e.trimPassword();
+            e.setPassword(passwordEncoder.encode(e.getPassword().trim()));
+        });
         return repository.updateAll(entities);
     }
 
