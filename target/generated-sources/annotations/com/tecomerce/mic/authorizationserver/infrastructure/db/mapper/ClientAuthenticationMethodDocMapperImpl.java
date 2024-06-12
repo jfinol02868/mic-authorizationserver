@@ -1,7 +1,7 @@
 package com.tecomerce.mic.authorizationserver.infrastructure.db.mapper;
 
 import com.tecomerce.mic.authorizationserver.domain.entity.ClientAuthenticationMethod;
-import com.tecomerce.mic.authorizationserver.infrastructure.db.document.ClientAuthenticationMethodDocument;
+import com.tecomerce.mic.authorizationserver.infrastructure.db.postgres.entity.ClientAuthenticationMethodEntity;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.processing.Generated;
@@ -9,14 +9,14 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-06-10T14:53:44+0200",
+    date = "2024-06-12T12:51:36+0200",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 17.0.11 (Eclipse Adoptium)"
 )
 @Component
 public class ClientAuthenticationMethodDocMapperImpl implements ClientAuthenticationMethodDocMapper {
 
     @Override
-    public ClientAuthenticationMethod toEntity(ClientAuthenticationMethodDocument document) {
+    public ClientAuthenticationMethod toModel(ClientAuthenticationMethodEntity document) {
         if ( document == null ) {
             return null;
         }
@@ -31,43 +31,43 @@ public class ClientAuthenticationMethodDocMapperImpl implements ClientAuthentica
     }
 
     @Override
-    public ClientAuthenticationMethodDocument toDocument(ClientAuthenticationMethod entity) {
+    public ClientAuthenticationMethodEntity toEntity(ClientAuthenticationMethod entity) {
         if ( entity == null ) {
             return null;
         }
 
-        ClientAuthenticationMethodDocument.ClientAuthenticationMethodDocumentBuilder clientAuthenticationMethodDocument = ClientAuthenticationMethodDocument.builder();
+        ClientAuthenticationMethodEntity.ClientAuthenticationMethodEntityBuilder clientAuthenticationMethodEntity = ClientAuthenticationMethodEntity.builder();
 
-        clientAuthenticationMethodDocument.id( entity.getId() );
-        clientAuthenticationMethodDocument.value( entity.getValue() );
-        clientAuthenticationMethodDocument.description( entity.getDescription() );
+        clientAuthenticationMethodEntity.id( entity.getId() );
+        clientAuthenticationMethodEntity.value( entity.getValue() );
+        clientAuthenticationMethodEntity.description( entity.getDescription() );
 
-        return clientAuthenticationMethodDocument.build();
+        return clientAuthenticationMethodEntity.build();
     }
 
     @Override
-    public List<ClientAuthenticationMethod> toEntityList(List<ClientAuthenticationMethodDocument> documents) {
+    public List<ClientAuthenticationMethod> toModelList(List<ClientAuthenticationMethodEntity> documents) {
         if ( documents == null ) {
             return null;
         }
 
         List<ClientAuthenticationMethod> list = new ArrayList<ClientAuthenticationMethod>( documents.size() );
-        for ( ClientAuthenticationMethodDocument clientAuthenticationMethodDocument : documents ) {
-            list.add( toEntity( clientAuthenticationMethodDocument ) );
+        for ( ClientAuthenticationMethodEntity clientAuthenticationMethodEntity : documents ) {
+            list.add( toModel( clientAuthenticationMethodEntity ) );
         }
 
         return list;
     }
 
     @Override
-    public List<ClientAuthenticationMethodDocument> toDocumentList(List<ClientAuthenticationMethod> entities) {
+    public List<ClientAuthenticationMethodEntity> toEntityList(List<ClientAuthenticationMethod> entities) {
         if ( entities == null ) {
             return null;
         }
 
-        List<ClientAuthenticationMethodDocument> list = new ArrayList<ClientAuthenticationMethodDocument>( entities.size() );
+        List<ClientAuthenticationMethodEntity> list = new ArrayList<ClientAuthenticationMethodEntity>( entities.size() );
         for ( ClientAuthenticationMethod clientAuthenticationMethod : entities ) {
-            list.add( toDocument( clientAuthenticationMethod ) );
+            list.add( toEntity( clientAuthenticationMethod ) );
         }
 
         return list;

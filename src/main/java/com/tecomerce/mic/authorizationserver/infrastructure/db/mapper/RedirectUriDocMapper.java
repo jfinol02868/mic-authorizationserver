@@ -1,8 +1,7 @@
 package com.tecomerce.mic.authorizationserver.infrastructure.db.mapper;
 
-import com.tecomerce.mic.authorizationserver.api.service.dto.RedirectUriDTO;
 import com.tecomerce.mic.authorizationserver.domain.entity.RedirectUri;
-import com.tecomerce.mic.authorizationserver.infrastructure.db.document.RedirectUriDocument;
+import com.tecomerce.mic.authorizationserver.infrastructure.db.postgres.entity.RedirectUriEntity;
 import org.mapstruct.Mapper;
 
 import java.util.List;
@@ -10,11 +9,11 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface RedirectUriDocMapper {
 
-    public RedirectUri toEntity(RedirectUriDocument document);
+    public RedirectUri toModel(RedirectUriEntity document);
 
-    public RedirectUriDocument toDocument(RedirectUri entity);
+    public RedirectUriEntity toEntity(RedirectUri entity);
 
-    public List<RedirectUri> toEntityList(List<RedirectUriDocument> documents);
+    public List<RedirectUri> toModelList(List<RedirectUriEntity> documents);
 
-    public List<RedirectUriDocument> toDocumentList(List<RedirectUri> entities);
+    public List<RedirectUriEntity> toEntityList(List<RedirectUri> entities);
 }

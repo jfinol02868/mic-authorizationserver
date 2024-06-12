@@ -1,8 +1,7 @@
 package com.tecomerce.mic.authorizationserver.infrastructure.db.mapper;
 
-import com.tecomerce.mic.authorizationserver.api.service.dto.ScopeDTO;
 import com.tecomerce.mic.authorizationserver.domain.entity.Scope;
-import com.tecomerce.mic.authorizationserver.infrastructure.db.document.ScopeDocument;
+import com.tecomerce.mic.authorizationserver.infrastructure.db.postgres.entity.ScopeEntity;
 import org.mapstruct.Mapper;
 
 import java.util.List;
@@ -10,11 +9,11 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface ScopeDocMapper {
 
-    public Scope toEntity(ScopeDocument dto);
+    public Scope toModel(ScopeEntity dto);
 
-    public ScopeDocument toDocument(Scope entity);
+    public ScopeEntity toEntity(Scope entity);
 
-    public List<Scope> toEntityList(List<ScopeDocument> dtos);
+    public List<Scope> toModelList(List<ScopeEntity> dtos);
 
-    public List<ScopeDocument> toDocumentList(List<Scope> entities);
+    public List<ScopeEntity> toEntityList(List<Scope> entities);
 }

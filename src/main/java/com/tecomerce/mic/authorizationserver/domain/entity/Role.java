@@ -7,21 +7,16 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.security.core.GrantedAuthority;
+
+import java.util.List;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Role implements GrantedAuthority {
+public class Role {
 
     private String id;
-
-    @Enumerated(EnumType.STRING)
-    private RoleName role;
-
-    @Override
-    public String getAuthority() {
-        return role.name();
-    }
+    private String roleName;
+    private List<User> users;
 }

@@ -1,9 +1,7 @@
 package com.tecomerce.mic.authorizationserver.application.usecase.impl;
 
-import com.tecomerce.mic.authorizationserver.application.usecase.ClientDetailUseCase;
 import com.tecomerce.mic.authorizationserver.application.usecase.ClientUseCase;
 import com.tecomerce.mic.authorizationserver.domain.entity.Client;
-import com.tecomerce.mic.authorizationserver.domain.entity.ClientDetail;
 import com.tecomerce.mic.authorizationserver.domain.repository.*;
 import com.tecomerce.mic.authorizationserver.domain.util.MapperUtil;
 import jakarta.transaction.Transactional;
@@ -15,13 +13,12 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class ClientUseCaseImpl implements ClientUseCase, ClientDetailUseCase {
+public class ClientUseCaseImpl implements ClientUseCase {
 
     private final MapperUtil filters;
     private final ClientRepository repository;
     private final ScopeRepository sRepository;
     private final RedirectUriRepository rURepository;
-    private final ClientDetailRepository cDRepository;
     private final AuthorizationGrantTypeRepository aGTRepository;
     private final ClientAuthenticationMethodRepository cAMRepository;
 
@@ -98,10 +95,5 @@ public class ClientUseCaseImpl implements ClientUseCase, ClientDetailUseCase {
     public List<Client> filters(String properties, int page, int size, String direction, String... sortProperties) {
         Client client = (Client) filters.mappingEntity(properties, Client.class);
         return repository.filters(client, page, size, direction, sortProperties);
-    }
-
-    @Override
-    public ClientDetail getClientDetail(String id) {
-        return cDRepository.getClientDetail(id);
     }
 }

@@ -2,7 +2,6 @@ package com.tecomerce.mic.authorizationserver.api.mapper;
 
 import com.tecomerce.mic.authorizationserver.api.service.dto.RoleDTO;
 import com.tecomerce.mic.authorizationserver.domain.entity.Role;
-import com.tecomerce.mic.authorizationserver.domain.enums.RoleName;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.processing.Generated;
@@ -10,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-06-10T14:53:44+0200",
+    date = "2024-06-12T12:51:37+0200",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 17.0.11 (Eclipse Adoptium)"
 )
 @Component
@@ -25,9 +24,7 @@ public class RoleDTOMapperImpl implements RoleDTOMapper {
         Role.RoleBuilder role = Role.builder();
 
         role.id( dto.getId() );
-        if ( dto.getRole() != null ) {
-            role.role( Enum.valueOf( RoleName.class, dto.getRole() ) );
-        }
+        role.roleName( dto.getRoleName() );
 
         return role.build();
     }
@@ -41,9 +38,7 @@ public class RoleDTOMapperImpl implements RoleDTOMapper {
         RoleDTO.RoleDTOBuilder roleDTO = RoleDTO.builder();
 
         roleDTO.id( entity.getId() );
-        if ( entity.getRole() != null ) {
-            roleDTO.role( entity.getRole().name() );
-        }
+        roleDTO.roleName( entity.getRoleName() );
 
         return roleDTO.build();
     }

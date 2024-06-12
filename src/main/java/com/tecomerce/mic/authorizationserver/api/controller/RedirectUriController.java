@@ -10,7 +10,6 @@ import io.swagger.v3.oas.annotations.tags.Tags;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,7 +18,6 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/v1/redirectUri")
-@PreAuthorize("hasRole('ROLE_ADMIN')")
 @Tags(value = {@Tag(name = "Redirect Uri", description = "Redirect Uri API")})
 public class RedirectUriController implements RedirectUriApi {
 

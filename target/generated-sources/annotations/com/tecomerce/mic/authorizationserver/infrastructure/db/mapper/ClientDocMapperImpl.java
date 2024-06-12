@@ -1,7 +1,7 @@
 package com.tecomerce.mic.authorizationserver.infrastructure.db.mapper;
 
 import com.tecomerce.mic.authorizationserver.domain.entity.Client;
-import com.tecomerce.mic.authorizationserver.infrastructure.db.document.ClientDocument;
+import com.tecomerce.mic.authorizationserver.infrastructure.db.postgres.entity.ClientEntity;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.processing.Generated;
@@ -9,99 +9,99 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-06-10T14:53:44+0200",
+    date = "2024-06-12T12:51:36+0200",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 17.0.11 (Eclipse Adoptium)"
 )
 @Component
 public class ClientDocMapperImpl implements ClientDocMapper {
 
     @Override
-    public Client toEntity(ClientDocument document) {
-        if ( document == null ) {
+    public Client toModel(ClientEntity client) {
+        if ( client == null ) {
             return null;
         }
 
-        Client.ClientBuilder client = Client.builder();
+        Client.ClientBuilder client1 = Client.builder();
 
-        client.id( document.getId() );
-        client.clientId( document.getClientId() );
-        client.clientSecret( document.getClientSecret() );
-        List<String> list = document.getAuthenticationMethods();
+        client1.id( client.getId() );
+        client1.clientId( client.getClientId() );
+        client1.clientSecret( client.getClientSecret() );
+        List<String> list = client.getAuthenticationMethods();
         if ( list != null ) {
-            client.authenticationMethods( new ArrayList<String>( list ) );
+            client1.authenticationMethods( new ArrayList<String>( list ) );
         }
-        List<String> list1 = document.getAuthorizationGrantTypes();
+        List<String> list1 = client.getAuthorizationGrantTypes();
         if ( list1 != null ) {
-            client.authorizationGrantTypes( new ArrayList<String>( list1 ) );
+            client1.authorizationGrantTypes( new ArrayList<String>( list1 ) );
         }
-        List<String> list2 = document.getRedirectUris();
+        List<String> list2 = client.getRedirectUris();
         if ( list2 != null ) {
-            client.redirectUris( new ArrayList<String>( list2 ) );
+            client1.redirectUris( new ArrayList<String>( list2 ) );
         }
-        List<String> list3 = document.getScopes();
+        List<String> list3 = client.getScopes();
         if ( list3 != null ) {
-            client.scopes( new ArrayList<String>( list3 ) );
+            client1.scopes( new ArrayList<String>( list3 ) );
         }
-        client.requireProofKey( document.getRequireProofKey() );
+        client1.requireProofKey( client.getRequireProofKey() );
 
-        return client.build();
+        return client1.build();
     }
 
     @Override
-    public ClientDocument toDocument(Client entity) {
-        if ( entity == null ) {
+    public ClientEntity toEntity(Client model) {
+        if ( model == null ) {
             return null;
         }
 
-        ClientDocument.ClientDocumentBuilder clientDocument = ClientDocument.builder();
+        ClientEntity.ClientEntityBuilder clientEntity = ClientEntity.builder();
 
-        clientDocument.id( entity.getId() );
-        clientDocument.clientId( entity.getClientId() );
-        clientDocument.clientSecret( entity.getClientSecret() );
-        List<String> list = entity.getAuthenticationMethods();
+        clientEntity.id( model.getId() );
+        clientEntity.clientId( model.getClientId() );
+        clientEntity.clientSecret( model.getClientSecret() );
+        List<String> list = model.getAuthenticationMethods();
         if ( list != null ) {
-            clientDocument.authenticationMethods( new ArrayList<String>( list ) );
+            clientEntity.authenticationMethods( new ArrayList<String>( list ) );
         }
-        List<String> list1 = entity.getAuthorizationGrantTypes();
+        List<String> list1 = model.getAuthorizationGrantTypes();
         if ( list1 != null ) {
-            clientDocument.authorizationGrantTypes( new ArrayList<String>( list1 ) );
+            clientEntity.authorizationGrantTypes( new ArrayList<String>( list1 ) );
         }
-        List<String> list2 = entity.getRedirectUris();
+        List<String> list2 = model.getRedirectUris();
         if ( list2 != null ) {
-            clientDocument.redirectUris( new ArrayList<String>( list2 ) );
+            clientEntity.redirectUris( new ArrayList<String>( list2 ) );
         }
-        List<String> list3 = entity.getScopes();
+        List<String> list3 = model.getScopes();
         if ( list3 != null ) {
-            clientDocument.scopes( new ArrayList<String>( list3 ) );
+            clientEntity.scopes( new ArrayList<String>( list3 ) );
         }
-        clientDocument.requireProofKey( entity.getRequireProofKey() );
+        clientEntity.requireProofKey( model.getRequireProofKey() );
 
-        return clientDocument.build();
+        return clientEntity.build();
     }
 
     @Override
-    public List<Client> toEntityList(List<ClientDocument> documents) {
-        if ( documents == null ) {
+    public List<Client> toModelList(List<ClientEntity> entities) {
+        if ( entities == null ) {
             return null;
         }
 
-        List<Client> list = new ArrayList<Client>( documents.size() );
-        for ( ClientDocument clientDocument : documents ) {
-            list.add( toEntity( clientDocument ) );
+        List<Client> list = new ArrayList<Client>( entities.size() );
+        for ( ClientEntity clientEntity : entities ) {
+            list.add( toModel( clientEntity ) );
         }
 
         return list;
     }
 
     @Override
-    public List<ClientDocument> toDocumentList(List<Client> entities) {
-        if ( entities == null ) {
+    public List<ClientEntity> toEntityList(List<Client> models) {
+        if ( models == null ) {
             return null;
         }
 
-        List<ClientDocument> list = new ArrayList<ClientDocument>( entities.size() );
-        for ( Client client : entities ) {
-            list.add( toDocument( client ) );
+        List<ClientEntity> list = new ArrayList<ClientEntity>( models.size() );
+        for ( Client client : models ) {
+            list.add( toEntity( client ) );
         }
 
         return list;

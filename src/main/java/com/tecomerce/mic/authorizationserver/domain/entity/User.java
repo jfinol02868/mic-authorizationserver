@@ -16,13 +16,13 @@ public class User {
     private String id;
     private String username;
     private String password;
-    private List<String> roles;
+    private List<Role> roles;
     private boolean expired = false;
     private boolean locked = false;
     private boolean credentialsExpired = false;
     private boolean disabled = false;
 
-    public String trimPassword() {
-        return this.password.trim();
+    public void trimPassword() {
+        this.password = null;
     }
 }

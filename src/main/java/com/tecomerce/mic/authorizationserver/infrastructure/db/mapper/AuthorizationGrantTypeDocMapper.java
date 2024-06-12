@@ -1,7 +1,7 @@
 package com.tecomerce.mic.authorizationserver.infrastructure.db.mapper;
 
 import com.tecomerce.mic.authorizationserver.domain.entity.AuthorizationGrantType;
-import com.tecomerce.mic.authorizationserver.infrastructure.db.document.AuthorizationGrantTypeDocument;
+import com.tecomerce.mic.authorizationserver.infrastructure.db.postgres.entity.AuthorizationGrantTypeEntity;
 import org.mapstruct.Mapper;
 
 import java.util.List;
@@ -9,11 +9,11 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface AuthorizationGrantTypeDocMapper {
 
-    public AuthorizationGrantType toEntity(AuthorizationGrantTypeDocument document);
+    public AuthorizationGrantType toModel(AuthorizationGrantTypeEntity document);
 
-    public AuthorizationGrantTypeDocument toDocument(AuthorizationGrantType entity);
+    public AuthorizationGrantTypeEntity toEntity(AuthorizationGrantType entity);
 
-    public List<AuthorizationGrantType> toEntityList(List<AuthorizationGrantTypeDocument> documents);
+    public List<AuthorizationGrantType> toModelList(List<AuthorizationGrantTypeEntity> documents);
 
-    public List<AuthorizationGrantTypeDocument> toDocumentList(List<AuthorizationGrantType> entities);
+    public List<AuthorizationGrantTypeEntity> toEntityList(List<AuthorizationGrantType> entities);
 }

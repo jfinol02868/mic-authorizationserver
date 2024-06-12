@@ -1,7 +1,9 @@
 package com.tecomerce.mic.authorizationserver.infrastructure.db.mapper;
 
+import com.tecomerce.mic.authorizationserver.domain.entity.Role;
 import com.tecomerce.mic.authorizationserver.domain.entity.User;
-import com.tecomerce.mic.authorizationserver.infrastructure.db.document.UserDocument;
+import com.tecomerce.mic.authorizationserver.infrastructure.db.postgres.entity.RoleEntity;
+import com.tecomerce.mic.authorizationserver.infrastructure.db.postgres.entity.UserEntity;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.processing.Generated;
@@ -9,14 +11,14 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-06-10T14:53:44+0200",
+    date = "2024-06-12T12:51:36+0200",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 17.0.11 (Eclipse Adoptium)"
 )
 @Component
 public class UserDocMapperImpl implements UserDocMapper {
 
     @Override
-    public User toEntity(UserDocument document) {
+    public User toModel(UserEntity document) {
         if ( document == null ) {
             return null;
         }
@@ -26,10 +28,7 @@ public class UserDocMapperImpl implements UserDocMapper {
         user.id( document.getId() );
         user.username( document.getUsername() );
         user.password( document.getPassword() );
-        List<String> list = document.getRoles();
-        if ( list != null ) {
-            user.roles( new ArrayList<String>( list ) );
-        }
+        user.roles( roleEntityListToRoleList( document.getRoles() ) );
         user.expired( document.isExpired() );
         user.locked( document.isLocked() );
         user.credentialsExpired( document.isCredentialsExpired() );
@@ -39,53 +38,104 @@ public class UserDocMapperImpl implements UserDocMapper {
     }
 
     @Override
-    public UserDocument toDocument(User entity) {
+    public UserEntity toEntity(User entity) {
         if ( entity == null ) {
             return null;
         }
 
-        UserDocument.UserDocumentBuilder userDocument = UserDocument.builder();
+        UserEntity.UserEntityBuilder userEntity = UserEntity.builder();
 
-        userDocument.id( entity.getId() );
-        userDocument.username( entity.getUsername() );
-        userDocument.password( entity.getPassword() );
-        List<String> list = entity.getRoles();
-        if ( list != null ) {
-            userDocument.roles( new ArrayList<String>( list ) );
-        }
-        userDocument.expired( entity.isExpired() );
-        userDocument.locked( entity.isLocked() );
-        userDocument.credentialsExpired( entity.isCredentialsExpired() );
-        userDocument.disabled( entity.isDisabled() );
+        userEntity.id( entity.getId() );
+        userEntity.username( entity.getUsername() );
+        userEntity.password( entity.getPassword() );
+        userEntity.roles( roleListToRoleEntityList( entity.getRoles() ) );
+        userEntity.expired( entity.isExpired() );
+        userEntity.locked( entity.isLocked() );
+        userEntity.credentialsExpired( entity.isCredentialsExpired() );
+        userEntity.disabled( entity.isDisabled() );
 
-        return userDocument.build();
+        return userEntity.build();
     }
 
     @Override
-    public List<User> toEntityList(List<UserDocument> documents) {
+    public List<User> toModelList(List<UserEntity> documents) {
         if ( documents == null ) {
             return null;
         }
 
         List<User> list = new ArrayList<User>( documents.size() );
-        for ( UserDocument userDocument : documents ) {
-            list.add( toEntity( userDocument ) );
+        for ( UserEntity userEntity : documents ) {
+            list.add( toModel( userEntity ) );
         }
 
         return list;
     }
 
     @Override
-    public List<UserDocument> toDocumentList(List<User> entities) {
+    public List<UserEntity> toEntityList(List<User> entities) {
         if ( entities == null ) {
             return null;
         }
 
-        List<UserDocument> list = new ArrayList<UserDocument>( entities.size() );
+        List<UserEntity> list = new ArrayList<UserEntity>( entities.size() );
         for ( User user : entities ) {
-            list.add( toDocument( user ) );
+            list.add( toEntity( user ) );
         }
 
         return list;
+    }
+
+    protected Role roleEntityToRole(RoleEntity roleEntity) {
+        if ( roleEntity == null ) {
+            return null;
+        }
+
+        Role.RoleBuilder role = Role.builder();
+
+        role.id( roleEntity.getId() );
+        role.roleName( roleEntity.getRoleName() );
+        role.users( toModelList( roleEntity.getUsers() ) );
+
+        return role.build();
+    }
+
+    protected List<Role> roleEntityListToRoleList(List<RoleEntity> list) {
+        if ( list == null ) {
+            return null;
+        }
+
+        List<Role> list1 = new ArrayList<Role>( list.size() );
+        for ( RoleEntity roleEntity : list ) {
+            list1.add( roleEntityToRole( roleEntity ) );
+        }
+
+        return list1;
+    }
+
+    protected RoleEntity roleToRoleEntity(Role role) {
+        if ( role == null ) {
+            return null;
+        }
+
+        RoleEntity.RoleEntityBuilder roleEntity = RoleEntity.builder();
+
+        roleEntity.id( role.getId() );
+        roleEntity.roleName( role.getRoleName() );
+        roleEntity.users( toEntityList( role.getUsers() ) );
+
+        return roleEntity.build();
+    }
+
+    protected List<RoleEntity> roleListToRoleEntityList(List<Role> list) {
+        if ( list == null ) {
+            return null;
+        }
+
+        List<RoleEntity> list1 = new ArrayList<RoleEntity>( list.size() );
+        for ( Role role : list ) {
+            list1.add( roleToRoleEntity( role ) );
+        }
+
+        return list1;
     }
 }
