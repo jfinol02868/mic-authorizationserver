@@ -13,24 +13,35 @@ springdoc:
       - url: /api-docs
         name: API Documentation
 
+#/web/swagger-ui/index.html
+
 spring:
   application:
     name: mic-authorizationserver
 
-  data:
-    mongodb:
-      database: authorization
-      username: ${MONGO_USER}
-      password: ${MONGO_PASSWORD}
-      host: ${MONGO_HOST}
-      port: 40912
-  autoconfigure:
-    exclude:
-      - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+  datasource:
+    url: ${DB_HOST}
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      connection-timeout: 20000
+      maximum:
+        pool-size: 5
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
 
 logging:
   level:
     org.springframework.security: trace
+    org:
+      hibernate:
+        type:
+          descriptor:
+            sql: trace
 
 app:
   environment: DES
