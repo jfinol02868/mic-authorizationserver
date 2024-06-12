@@ -9,11 +9,11 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface AuthorizationGrantTypeDocMapper {
 
-    public AuthorizationGrantType toModel(AuthorizationGrantTypeEntity document);
+    AuthorizationGrantType toModel(AuthorizationGrantTypeEntity document);
 
-    public AuthorizationGrantTypeEntity toEntity(AuthorizationGrantType entity);
+    AuthorizationGrantTypeEntity toEntity(AuthorizationGrantType entity);
 
-    public List<AuthorizationGrantType> toModelList(List<AuthorizationGrantTypeEntity> documents);
+    List<AuthorizationGrantType> toModelList(List<AuthorizationGrantTypeEntity> documents);
 
-    public List<AuthorizationGrantTypeEntity> toEntityList(List<AuthorizationGrantType> entities);
+    List<AuthorizationGrantTypeEntity> toEntityList(List<AuthorizationGrantType> entities);
 }

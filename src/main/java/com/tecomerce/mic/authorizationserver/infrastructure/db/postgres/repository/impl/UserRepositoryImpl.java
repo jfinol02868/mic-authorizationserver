@@ -2,7 +2,6 @@ package com.tecomerce.mic.authorizationserver.infrastructure.db.postgres.reposit
 
 import com.tecomerce.mic.authorizationserver.domain.entity.User;
 import com.tecomerce.mic.authorizationserver.domain.exception.EntityNotFoundException;
-import com.tecomerce.mic.authorizationserver.domain.repository.RoleRepository;
 import com.tecomerce.mic.authorizationserver.domain.repository.UserRepository;
 import com.tecomerce.mic.authorizationserver.infrastructure.db.mapper.UserDocMapper;
 import com.tecomerce.mic.authorizationserver.infrastructure.db.postgres.entity.UserEntity;
@@ -26,7 +25,6 @@ public class UserRepositoryImpl implements UserRepository {
 
     private final UserDocMapper mapper;
     private final IdGenerator idGenerator;
-    private final RoleRepository rRepository;
     private final UserRepositoryAdapter repository;
 
 

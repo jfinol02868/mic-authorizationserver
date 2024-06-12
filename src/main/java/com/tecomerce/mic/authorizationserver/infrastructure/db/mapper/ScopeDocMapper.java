@@ -9,11 +9,11 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface ScopeDocMapper {
 
-    public Scope toModel(ScopeEntity dto);
+    Scope toModel(ScopeEntity dto);
 
-    public ScopeEntity toEntity(Scope entity);
+    ScopeEntity toEntity(Scope entity);
 
-    public List<Scope> toModelList(List<ScopeEntity> dtos);
+    List<Scope> toModelList(List<ScopeEntity> dtos);
 
-    public List<ScopeEntity> toEntityList(List<Scope> entities);
+    List<ScopeEntity> toEntityList(List<Scope> entities);
 }

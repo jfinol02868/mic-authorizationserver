@@ -1,7 +1,6 @@
 package com.tecomerce.mic.authorizationserver.api.controller;
 
 import com.tecomerce.mic.authorizationserver.api.mapper.UserDTOMapper;
-import com.tecomerce.mic.authorizationserver.api.mapper.UserDetailDtoMapper;
 import com.tecomerce.mic.authorizationserver.api.service.UseDetailApi;
 import com.tecomerce.mic.authorizationserver.api.service.UserApi;
 import com.tecomerce.mic.authorizationserver.api.service.dto.SortEnumDTO;
@@ -24,9 +23,7 @@ import java.util.List;
 @Tags(value = {@Tag(name = "User", description = "User API")})
 public class UserController implements UserApi, UseDetailApi {
 
-    private final UserDTOMapper mapper;
     private final UserUseCase useCase;
-    private final UserDetailDtoMapper uDMapper;
 
     @Override
     public ResponseEntity<UserDTO> create(UserDTO entity) {

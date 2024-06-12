@@ -9,11 +9,11 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface RoleDocMapper {
 
-    public Role toModel(RoleEntity document);
+    Role toModel(RoleEntity document);
 
-    public RoleEntity toEntity(Role entity);
+    RoleEntity toEntity(Role entity);
 
-    public List<Role> toModelList(List<RoleEntity> documents);
+    List<Role> toModelList(List<RoleEntity> documents);
 
-    public  List<RoleEntity> toEntityList(List<Role> entities);
+    List<RoleEntity> toEntityList(List<Role> entities);
 }

@@ -5,7 +5,6 @@ import com.tecomerce.mic.authorizationserver.infrastructure.db.postgres.entity.A
 import com.tecomerce.mic.authorizationserver.infrastructure.db.postgres.entity.ClientAuthenticationMethodEntity;
 import com.tecomerce.mic.authorizationserver.infrastructure.db.postgres.entity.RedirectUriEntity;
 import com.tecomerce.mic.authorizationserver.infrastructure.db.postgres.entity.ScopeEntity;
-import jakarta.persistence.Entity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

@@ -9,11 +9,11 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface ClientAuthenticationMethodDocMapper {
 
-    public ClientAuthenticationMethod toModel(ClientAuthenticationMethodEntity document);
+    ClientAuthenticationMethod toModel(ClientAuthenticationMethodEntity document);
 
-    public ClientAuthenticationMethodEntity toEntity(ClientAuthenticationMethod entity);
+    ClientAuthenticationMethodEntity toEntity(ClientAuthenticationMethod entity);
 
-    public List<ClientAuthenticationMethod> toModelList(List<ClientAuthenticationMethodEntity> documents);
+    List<ClientAuthenticationMethod> toModelList(List<ClientAuthenticationMethodEntity> documents);
 
-    public List<ClientAuthenticationMethodEntity> toEntityList(List<ClientAuthenticationMethod> entities);
+    List<ClientAuthenticationMethodEntity> toEntityList(List<ClientAuthenticationMethod> entities);
 }

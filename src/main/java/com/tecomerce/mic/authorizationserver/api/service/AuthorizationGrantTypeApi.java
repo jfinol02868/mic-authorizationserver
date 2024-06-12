@@ -17,7 +17,7 @@ import java.util.List;
 
 public interface AuthorizationGrantTypeApi {
 
-    static final String MEDIA_TYPE = "application/json";
+    final String MEDIA_TYPE = "application/json";
 
     @PostMapping
     @Operation( operationId = "creation-authorizationGrantType", description = "Creation of authorization grant type.")

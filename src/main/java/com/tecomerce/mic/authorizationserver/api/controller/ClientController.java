@@ -1,7 +1,6 @@
 package com.tecomerce.mic.authorizationserver.api.controller;
 
 import com.tecomerce.mic.authorizationserver.api.mapper.ClientDTOMapper;
-import com.tecomerce.mic.authorizationserver.api.mapper.ClientDetailDTOMapper;
 import com.tecomerce.mic.authorizationserver.api.service.ClientApi;
 import com.tecomerce.mic.authorizationserver.api.service.ClientDetailApi;
 import com.tecomerce.mic.authorizationserver.api.service.dto.ClientDTO;
@@ -26,7 +25,6 @@ public class ClientController implements ClientApi, ClientDetailApi {
 
     private final ClientUseCase useCase;
     private final ClientDTOMapper mapper;
-    private final ClientDetailDTOMapper cDMapper;
 
     @Override
     public ResponseEntity<ClientDTO> create(ClientDTO entity) {

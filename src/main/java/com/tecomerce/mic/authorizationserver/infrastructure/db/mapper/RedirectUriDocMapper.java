@@ -9,11 +9,11 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface RedirectUriDocMapper {
 
-    public RedirectUri toModel(RedirectUriEntity document);
+    RedirectUri toModel(RedirectUriEntity document);
 
-    public RedirectUriEntity toEntity(RedirectUri entity);
+    RedirectUriEntity toEntity(RedirectUri entity);
 
-    public List<RedirectUri> toModelList(List<RedirectUriEntity> documents);
+    List<RedirectUri> toModelList(List<RedirectUriEntity> documents);
 
-    public List<RedirectUriEntity> toEntityList(List<RedirectUri> entities);
+    List<RedirectUriEntity> toEntityList(List<RedirectUri> entities);
 }

@@ -59,7 +59,7 @@ public class ClientUseCaseImpl implements ClientUseCase {
         return repository.updateAll(entitiesValidated);
     }
 
-    private final void validateClient(Client entity) {
+    private void validateClient(Client entity) {
         entity.getAuthenticationMethods().forEach(cAMRepository::findById);
         entity.getAuthorizationGrantTypes().forEach(aGTRepository::findById);
         entity.getRedirectUris().forEach(rURepository::findById);

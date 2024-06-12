@@ -9,11 +9,11 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface ClientDocMapper {
 
-    public Client toModel(ClientEntity client);
+    Client toModel(ClientEntity client);
 
-    public ClientEntity toEntity(Client model);
+    ClientEntity toEntity(Client model);
 
-    public List<Client> toModelList(List<ClientEntity> entities);
+    List<Client> toModelList(List<ClientEntity> entities);
 
-    public List<ClientEntity> toEntityList(List<Client> models);
+    List<ClientEntity> toEntityList(List<Client> models);
 }

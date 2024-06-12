@@ -1,8 +1,5 @@
 package com.tecomerce.mic.authorizationserver.domain.entity;
 
-import com.tecomerce.mic.authorizationserver.domain.enums.RoleName;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
