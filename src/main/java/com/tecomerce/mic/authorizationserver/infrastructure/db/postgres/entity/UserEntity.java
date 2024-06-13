@@ -1,12 +1,10 @@
 package com.tecomerce.mic.authorizationserver.infrastructure.db.postgres.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.data.annotation.TypeAlias;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Data
@@ -15,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @TypeAlias("user")
 @Entity(name = "users")
-public class UserEntity {
+public class UserEntity implements Serializable {
 
     @Id
     private String id;
@@ -27,6 +25,8 @@ public class UserEntity {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     private List<RoleEntity> roles;
     private boolean expired = false;
     private boolean locked = false;

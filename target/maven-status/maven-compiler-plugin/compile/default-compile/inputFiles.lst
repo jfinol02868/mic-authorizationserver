@@ -24,6 +24,7 @@ C:\dev\mic-authorizationserver\src\main\java\com\tecomerce\mic\authorizationserv
 C:\dev\mic-authorizationserver\src\main\java\com\tecomerce\mic\authorizationserver\infrastructure\db\postgres\repository\impl\AuthorizationGrantTypeRepositoryImpl.java
 C:\dev\mic-authorizationserver\src\main\java\com\tecomerce\mic\authorizationserver\api\controller\UserController.java
 C:\dev\mic-authorizationserver\src\main\java\com\tecomerce\mic\authorizationserver\application\usecase\impl\UserUseCaseImpl.java
+C:\dev\mic-authorizationserver\src\main\java\com\tecomerce\mic\authorizationserver\application\configuration\SecurityConfig.java
 C:\dev\mic-authorizationserver\src\main\java\com\tecomerce\mic\authorizationserver\domain\entity\RedirectUri.java
 C:\dev\mic-authorizationserver\src\main\java\com\tecomerce\mic\authorizationserver\api\service\dto\ClientDetailDTO.java
 C:\dev\mic-authorizationserver\src\main\java\com\tecomerce\mic\authorizationserver\api\mapper\AuthorizationGrantTypeDTOMapper.java
@@ -39,6 +40,7 @@ C:\dev\mic-authorizationserver\src\main\java\com\tecomerce\mic\authorizationserv
 C:\dev\mic-authorizationserver\src\main\java\com\tecomerce\mic\authorizationserver\api\controller\ClientAuthenticationMethodController.java
 C:\dev\mic-authorizationserver\src\main\java\com\tecomerce\mic\authorizationserver\infrastructure\db\postgres\repository\RedirectUriRepositoryAdapter.java
 C:\dev\mic-authorizationserver\src\main\java\com\tecomerce\mic\authorizationserver\api\service\RoleApi.java
+C:\dev\mic-authorizationserver\src\main\java\com\tecomerce\mic\authorizationserver\application\configuration\BeanConfiguration.java
 C:\dev\mic-authorizationserver\src\main\java\com\tecomerce\mic\authorizationserver\application\usecase\impl\ClientUseCaseImpl.java
 C:\dev\mic-authorizationserver\src\main\java\com\tecomerce\mic\authorizationserver\infrastructure\db\postgres\repository\impl\ClientAuthenticationMethodRepositoryImpl.java
 C:\dev\mic-authorizationserver\src\main\java\com\tecomerce\mic\authorizationserver\application\usecase\RoleUseCase.java

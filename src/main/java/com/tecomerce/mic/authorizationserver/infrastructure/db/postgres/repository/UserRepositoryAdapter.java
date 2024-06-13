@@ -6,4 +6,5 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 public interface UserRepositoryAdapter extends JpaRepository<UserEntity, String>, JpaSpecificationExecutor<UserEntity> {
 
+    UserEntity findByUsername(String username);
 }

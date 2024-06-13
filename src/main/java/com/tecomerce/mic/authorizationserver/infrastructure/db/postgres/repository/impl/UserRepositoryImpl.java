@@ -1,10 +1,14 @@
 package com.tecomerce.mic.authorizationserver.infrastructure.db.postgres.repository.impl;
 
+import com.tecomerce.mic.authorizationserver.domain.entity.Role;
 import com.tecomerce.mic.authorizationserver.domain.entity.User;
 import com.tecomerce.mic.authorizationserver.domain.exception.EntityNotFoundException;
 import com.tecomerce.mic.authorizationserver.domain.repository.UserRepository;
+import com.tecomerce.mic.authorizationserver.infrastructure.db.mapper.RoleDocMapper;
 import com.tecomerce.mic.authorizationserver.infrastructure.db.mapper.UserDocMapper;
+import com.tecomerce.mic.authorizationserver.infrastructure.db.postgres.entity.RoleEntity;
 import com.tecomerce.mic.authorizationserver.infrastructure.db.postgres.entity.UserEntity;
+import com.tecomerce.mic.authorizationserver.infrastructure.db.postgres.repository.RoleRepositoryAdapter;
 import com.tecomerce.mic.authorizationserver.infrastructure.db.postgres.repository.UserRepositoryAdapter;
 import com.tecomerce.mic.authorizationserver.infrastructure.db.postgres.repository.specification.GenericSpecification;
 import com.tecomerce.mic.authorizationserver.infrastructure.util.IdGenerator;
@@ -16,6 +20,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -24,13 +29,21 @@ import java.util.Objects;
 public class UserRepositoryImpl implements UserRepository {
 
     private final UserDocMapper mapper;
+    private final RoleDocMapper rMapper;
     private final IdGenerator idGenerator;
     private final UserRepositoryAdapter repository;
+    private final RoleRepositoryAdapter rRepository;
 
 
     @Override
     public User create(User entity) {
         if (Objects.isNull(entity.getId())) entity.setId(idGenerator.generateId(UserEntity.class));
+        List<Role> roles = new ArrayList<>();
+        entity.getRoles().forEach( r -> {
+            RoleEntity role = rRepository.findById(r.getId()).orElseThrow(() -> new EntityNotFoundException(r.getId()));
+            roles.add(rMapper.toModel(role));
+        });
+        entity.setRoles(roles);
         return mapper.toModel(repository.save(mapper.toEntity(entity)));
     }
 
@@ -102,5 +115,10 @@ public class UserRepositoryImpl implements UserRepository {
         Specification<UserEntity> spec = new GenericSpecification<>(mapper.toEntity(entity));
         Page<UserEntity> result = repository.findAll(spec, pageable);
         return mapper.toModelList(result.getContent());
+    }
+
+    @Override
+    public User findByUsername(String username) {
+        return mapper.toModel(repository.findByUsername(username));
     }
 }

@@ -65,6 +65,7 @@ com\tecomerce\mic\authorizationserver\domain\repository\ClientAuthenticationMeth
 com\tecomerce\mic\authorizationserver\infrastructure\db\postgres\entity\ScopeEntity$ScopeEntityBuilder.class
 com\tecomerce\mic\authorizationserver\application\usecase\RedirectUriUseCase.class
 com\tecomerce\mic\authorizationserver\api\mapper\UserDetailDtoMapper.class
+com\tecomerce\mic\authorizationserver\application\configuration\SecurityConfig.class
 com\tecomerce\mic\authorizationserver\infrastructure\db\postgres\repository\impl\RoleRepositoryImpl.class
 com\tecomerce\mic\authorizationserver\domain\repository\ClientRepository.class
 com\tecomerce\mic\authorizationserver\infrastructure\db\postgres\repository\impl\ClientAuthenticationMethodRepositoryImpl.class
@@ -77,6 +78,7 @@ com\tecomerce\mic\authorizationserver\application\usecase\impl\RoleUseCaseImpl.c
 com\tecomerce\mic\authorizationserver\api\service\ClientApi.class
 com\tecomerce\mic\authorizationserver\domain\entity\ClientAuthenticationMethod.class
 com\tecomerce\mic\authorizationserver\api\mapper\UserDetailDtoMapperImpl.class
+com\tecomerce\mic\authorizationserver\application\configuration\BeanConfiguration.class
 com\tecomerce\mic\authorizationserver\infrastructure\db\postgres\entity\AuthorizationGrantTypeEntity$AuthorizationGrantTypeEntityBuilder.class
 com\tecomerce\mic\authorizationserver\infrastructure\db\postgres\repository\impl\ClientRepositoryImpl.class
 com\tecomerce\mic\authorizationserver\domain\entity\Scope.class

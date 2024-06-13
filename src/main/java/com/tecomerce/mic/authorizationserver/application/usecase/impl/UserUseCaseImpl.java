@@ -1,43 +1,41 @@
 package com.tecomerce.mic.authorizationserver.application.usecase.impl;
 
 import com.tecomerce.mic.authorizationserver.application.usecase.UserUseCase;
-import com.tecomerce.mic.authorizationserver.domain.entity.Role;
 import com.tecomerce.mic.authorizationserver.domain.entity.User;
 import com.tecomerce.mic.authorizationserver.domain.repository.RoleRepository;
 import com.tecomerce.mic.authorizationserver.domain.repository.UserRepository;
 import com.tecomerce.mic.authorizationserver.domain.util.MapperUtil;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
-public class UserUseCaseImpl implements UserUseCase {
+public class UserUseCaseImpl implements UserUseCase, UserDetailsService {
 
     private final MapperUtil filters;
     private final UserRepository repository;
     private final RoleRepository roleRepository;
-
+    private final PasswordEncoder passwordEncoder;
 
     @Override
+    @Transactional
     public User create(User entity) {
-        entity.trimPassword();
-        List<Role> roles = new ArrayList<>();
-        entity.getRoles().forEach(r -> {
-            Role role = roleRepository.findById(r.getId());
-            roles.add(role);
-        });
-        entity.setRoles(roles);
+        entity.setPassword(passwordEncoder.encode(entity.getPassword()));
         return repository.create(entity);
     }
 
     @Override
     public List<User> createAll(List<User> entities) {
         entities.forEach(e -> {
-            e.trimPassword();
+            e.setPassword(passwordEncoder.encode(e.getPassword().trim()));
             e.setRoles(e.getRoles().stream()
                     .map(r -> roleRepository.findById(r.getId()))
                     .collect(Collectors.toList()));
@@ -90,5 +88,11 @@ public class UserUseCaseImpl implements UserUseCase {
     public List<User> filters(String properties, int page, int size, String direction, String... sortProperties) {
         User user = (User) filters.mappingEntity(properties, User.class);
         return repository.filters(user, page, size, direction, sortProperties);
+    }
+
+    @Override
+    @Transactional
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return repository.findByUsername(username);
     }
 }
