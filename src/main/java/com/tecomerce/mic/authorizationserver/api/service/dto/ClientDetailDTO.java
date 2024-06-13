@@ -1,14 +1,8 @@
 package com.tecomerce.mic.authorizationserver.api.service.dto;
 
 
-import com.tecomerce.mic.authorizationserver.infrastructure.db.document.AuthorizationGrantTypeDocument;
-import com.tecomerce.mic.authorizationserver.infrastructure.db.document.ClientAuthenticationMethodDocument;
-import com.tecomerce.mic.authorizationserver.infrastructure.db.document.RedirectUriDocument;
-import com.tecomerce.mic.authorizationserver.infrastructure.db.document.ScopeDocument;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,7 +11,6 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 
 @Data
-@Entity
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -29,14 +22,14 @@ public class ClientDetailDTO {
     private String clientId;
     @Schema(description = "Client Secret", example = "secret")
     private String clientSecret;
-    @ArraySchema(schema = @Schema(implementation = ClientAuthenticationMethodDocument.class))
-    private List<ClientAuthenticationMethodDocument> authenticationMethods;
-    @ArraySchema(schema = @Schema(implementation = AuthorizationGrantTypeDocument.class))
-    private List<AuthorizationGrantTypeDocument> authorizationGrantTypes;
-    @ArraySchema(schema = @Schema(implementation = RedirectUriDocument.class))
-    private List<RedirectUriDocument> redirectUris;
-    @ArraySchema(schema = @Schema(implementation = ScopeDocument.class))
-    private List<ScopeDocument> scopes;
+    @ArraySchema(schema = @Schema(implementation = ClientAuthenticationMethodDTO.class))
+    private List<ClientAuthenticationMethodDTO> authenticationMethods;
+    @ArraySchema(schema = @Schema(implementation = AuthorizationGrantTypeDTO.class))
+    private List<AuthorizationGrantTypeDTO> authorizationGrantTypes;
+    @ArraySchema(schema = @Schema(implementation = RedirectUriDTO.class))
+    private List<RedirectUriDTO> redirectUris;
+    @ArraySchema(schema = @Schema(implementation = ScopeDTO.class))
+    private List<ScopeDTO> scopes;
     @Schema(description = "Require Proof Key", example = "false")
     private Boolean requireProofKey;
 

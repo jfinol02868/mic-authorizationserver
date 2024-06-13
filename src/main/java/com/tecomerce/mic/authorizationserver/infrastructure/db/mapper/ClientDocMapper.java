@@ -1,7 +1,7 @@
 package com.tecomerce.mic.authorizationserver.infrastructure.db.mapper;
 
 import com.tecomerce.mic.authorizationserver.domain.entity.Client;
-import com.tecomerce.mic.authorizationserver.infrastructure.db.document.ClientDocument;
+import com.tecomerce.mic.authorizationserver.infrastructure.db.postgres.entity.ClientEntity;
 import org.mapstruct.Mapper;
 
 import java.util.List;
@@ -9,11 +9,11 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface ClientDocMapper {
 
-    public Client toEntity(ClientDocument document);
+    Client toModel(ClientEntity client);
 
-    public ClientDocument toDocument(Client entity);
+    ClientEntity toEntity(Client model);
 
-    public List<Client> toEntityList(List<ClientDocument> documents);
+    List<Client> toModelList(List<ClientEntity> entities);
 
-    public List<ClientDocument> toDocumentList(List<Client> entities);
+    List<ClientEntity> toEntityList(List<Client> models);
 }

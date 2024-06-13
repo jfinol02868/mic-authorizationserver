@@ -1,7 +1,7 @@
 package com.tecomerce.mic.authorizationserver.infrastructure.db.mapper;
 
 import com.tecomerce.mic.authorizationserver.domain.entity.RedirectUri;
-import com.tecomerce.mic.authorizationserver.infrastructure.db.document.RedirectUriDocument;
+import com.tecomerce.mic.authorizationserver.infrastructure.db.postgres.entity.RedirectUriEntity;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.processing.Generated;
@@ -9,14 +9,14 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-06-10T14:53:44+0200",
+    date = "2024-06-13T11:24:42+0200",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 17.0.11 (Eclipse Adoptium)"
 )
 @Component
 public class RedirectUriDocMapperImpl implements RedirectUriDocMapper {
 
     @Override
-    public RedirectUri toEntity(RedirectUriDocument document) {
+    public RedirectUri toModel(RedirectUriEntity document) {
         if ( document == null ) {
             return null;
         }
@@ -31,43 +31,43 @@ public class RedirectUriDocMapperImpl implements RedirectUriDocMapper {
     }
 
     @Override
-    public RedirectUriDocument toDocument(RedirectUri entity) {
+    public RedirectUriEntity toEntity(RedirectUri entity) {
         if ( entity == null ) {
             return null;
         }
 
-        RedirectUriDocument.RedirectUriDocumentBuilder redirectUriDocument = RedirectUriDocument.builder();
+        RedirectUriEntity.RedirectUriEntityBuilder redirectUriEntity = RedirectUriEntity.builder();
 
-        redirectUriDocument.id( entity.getId() );
-        redirectUriDocument.uri( entity.getUri() );
-        redirectUriDocument.description( entity.getDescription() );
+        redirectUriEntity.id( entity.getId() );
+        redirectUriEntity.uri( entity.getUri() );
+        redirectUriEntity.description( entity.getDescription() );
 
-        return redirectUriDocument.build();
+        return redirectUriEntity.build();
     }
 
     @Override
-    public List<RedirectUri> toEntityList(List<RedirectUriDocument> documents) {
+    public List<RedirectUri> toModelList(List<RedirectUriEntity> documents) {
         if ( documents == null ) {
             return null;
         }
 
         List<RedirectUri> list = new ArrayList<RedirectUri>( documents.size() );
-        for ( RedirectUriDocument redirectUriDocument : documents ) {
-            list.add( toEntity( redirectUriDocument ) );
+        for ( RedirectUriEntity redirectUriEntity : documents ) {
+            list.add( toModel( redirectUriEntity ) );
         }
 
         return list;
     }
 
     @Override
-    public List<RedirectUriDocument> toDocumentList(List<RedirectUri> entities) {
+    public List<RedirectUriEntity> toEntityList(List<RedirectUri> entities) {
         if ( entities == null ) {
             return null;
         }
 
-        List<RedirectUriDocument> list = new ArrayList<RedirectUriDocument>( entities.size() );
+        List<RedirectUriEntity> list = new ArrayList<RedirectUriEntity>( entities.size() );
         for ( RedirectUri redirectUri : entities ) {
-            list.add( toDocument( redirectUri ) );
+            list.add( toEntity( redirectUri ) );
         }
 
         return list;

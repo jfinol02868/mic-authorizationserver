@@ -1,21 +1,17 @@
 package com.tecomerce.mic.authorizationserver.api.controller;
 
 import com.tecomerce.mic.authorizationserver.api.mapper.ClientDTOMapper;
-import com.tecomerce.mic.authorizationserver.api.mapper.ClientDetailDTOMapper;
 import com.tecomerce.mic.authorizationserver.api.service.ClientApi;
 import com.tecomerce.mic.authorizationserver.api.service.ClientDetailApi;
 import com.tecomerce.mic.authorizationserver.api.service.dto.ClientDTO;
 import com.tecomerce.mic.authorizationserver.api.service.dto.ClientDetailDTO;
 import com.tecomerce.mic.authorizationserver.api.service.dto.SortEnumDTO;
-import com.tecomerce.mic.authorizationserver.application.usecase.ClientDetailUseCase;
 import com.tecomerce.mic.authorizationserver.application.usecase.ClientUseCase;
-import com.tecomerce.mic.authorizationserver.infrastructure.db.mapper.ClientDetailDocMapper;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.tags.Tags;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,14 +20,11 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/v1/client")
-@PreAuthorize("hasRole('ROLE_ADMIN')")
 @Tags(value = {@Tag(name = "Client", description = "Client API")})
 public class ClientController implements ClientApi, ClientDetailApi {
 
     private final ClientUseCase useCase;
     private final ClientDTOMapper mapper;
-    private final ClientDetailUseCase cDUseCase;
-    private final ClientDetailDTOMapper cDMapper;
 
     @Override
     public ResponseEntity<ClientDTO> create(ClientDTO entity) {
@@ -92,6 +85,6 @@ public class ClientController implements ClientApi, ClientDetailApi {
 
     @Override
     public ResponseEntity<ClientDetailDTO> findClientDetailById(String id) {
-        return new ResponseEntity<>(cDMapper.toDto(cDUseCase.getClientDetail(id)), HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
     }
 }

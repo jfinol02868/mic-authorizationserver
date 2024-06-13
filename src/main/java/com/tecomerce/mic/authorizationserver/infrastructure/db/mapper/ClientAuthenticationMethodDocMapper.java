@@ -1,8 +1,7 @@
 package com.tecomerce.mic.authorizationserver.infrastructure.db.mapper;
 
-import com.tecomerce.mic.authorizationserver.api.service.dto.ClientAuthenticationMethodDTO;
 import com.tecomerce.mic.authorizationserver.domain.entity.ClientAuthenticationMethod;
-import com.tecomerce.mic.authorizationserver.infrastructure.db.document.ClientAuthenticationMethodDocument;
+import com.tecomerce.mic.authorizationserver.infrastructure.db.postgres.entity.ClientAuthenticationMethodEntity;
 import org.mapstruct.Mapper;
 
 import java.util.List;
@@ -10,11 +9,11 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface ClientAuthenticationMethodDocMapper {
 
-    public ClientAuthenticationMethod toEntity(ClientAuthenticationMethodDocument document);
+    ClientAuthenticationMethod toModel(ClientAuthenticationMethodEntity document);
 
-    public ClientAuthenticationMethodDocument toDocument(ClientAuthenticationMethod entity);
+    ClientAuthenticationMethodEntity toEntity(ClientAuthenticationMethod entity);
 
-    public List<ClientAuthenticationMethod> toEntityList(List<ClientAuthenticationMethodDocument> documents);
+    List<ClientAuthenticationMethod> toModelList(List<ClientAuthenticationMethodEntity> documents);
 
-    public List<ClientAuthenticationMethodDocument> toDocumentList(List<ClientAuthenticationMethod> entities);
+    List<ClientAuthenticationMethodEntity> toEntityList(List<ClientAuthenticationMethod> entities);
 }
