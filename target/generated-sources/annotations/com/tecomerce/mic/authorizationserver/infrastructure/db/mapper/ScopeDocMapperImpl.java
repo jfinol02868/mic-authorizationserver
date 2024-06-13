@@ -1,7 +1,7 @@
 package com.tecomerce.mic.authorizationserver.infrastructure.db.mapper;
 
 import com.tecomerce.mic.authorizationserver.domain.entity.Scope;
-import com.tecomerce.mic.authorizationserver.infrastructure.db.document.ScopeDocument;
+import com.tecomerce.mic.authorizationserver.infrastructure.db.postgres.entity.ScopeEntity;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.processing.Generated;
@@ -9,14 +9,14 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-06-10T14:53:43+0200",
+    date = "2024-06-13T11:24:41+0200",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 17.0.11 (Eclipse Adoptium)"
 )
 @Component
 public class ScopeDocMapperImpl implements ScopeDocMapper {
 
     @Override
-    public Scope toEntity(ScopeDocument dto) {
+    public Scope toModel(ScopeEntity dto) {
         if ( dto == null ) {
             return null;
         }
@@ -31,43 +31,43 @@ public class ScopeDocMapperImpl implements ScopeDocMapper {
     }
 
     @Override
-    public ScopeDocument toDocument(Scope entity) {
+    public ScopeEntity toEntity(Scope entity) {
         if ( entity == null ) {
             return null;
         }
 
-        ScopeDocument.ScopeDocumentBuilder scopeDocument = ScopeDocument.builder();
+        ScopeEntity.ScopeEntityBuilder scopeEntity = ScopeEntity.builder();
 
-        scopeDocument.id( entity.getId() );
-        scopeDocument.name( entity.getName() );
-        scopeDocument.description( entity.getDescription() );
+        scopeEntity.id( entity.getId() );
+        scopeEntity.name( entity.getName() );
+        scopeEntity.description( entity.getDescription() );
 
-        return scopeDocument.build();
+        return scopeEntity.build();
     }
 
     @Override
-    public List<Scope> toEntityList(List<ScopeDocument> dtos) {
+    public List<Scope> toModelList(List<ScopeEntity> dtos) {
         if ( dtos == null ) {
             return null;
         }
 
         List<Scope> list = new ArrayList<Scope>( dtos.size() );
-        for ( ScopeDocument scopeDocument : dtos ) {
-            list.add( toEntity( scopeDocument ) );
+        for ( ScopeEntity scopeEntity : dtos ) {
+            list.add( toModel( scopeEntity ) );
         }
 
         return list;
     }
 
     @Override
-    public List<ScopeDocument> toDocumentList(List<Scope> entities) {
+    public List<ScopeEntity> toEntityList(List<Scope> entities) {
         if ( entities == null ) {
             return null;
         }
 
-        List<ScopeDocument> list = new ArrayList<ScopeDocument>( entities.size() );
+        List<ScopeEntity> list = new ArrayList<ScopeEntity>( entities.size() );
         for ( Scope scope : entities ) {
-            list.add( toDocument( scope ) );
+            list.add( toEntity( scope ) );
         }
 
         return list;

@@ -1,7 +1,7 @@
 package com.tecomerce.mic.authorizationserver.infrastructure.db.mapper;
 
 import com.tecomerce.mic.authorizationserver.domain.entity.AuthorizationGrantType;
-import com.tecomerce.mic.authorizationserver.infrastructure.db.document.AuthorizationGrantTypeDocument;
+import com.tecomerce.mic.authorizationserver.infrastructure.db.postgres.entity.AuthorizationGrantTypeEntity;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.processing.Generated;
@@ -9,14 +9,14 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-06-10T14:53:45+0200",
+    date = "2024-06-13T11:24:42+0200",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 17.0.11 (Eclipse Adoptium)"
 )
 @Component
 public class AuthorizationGrantTypeDocMapperImpl implements AuthorizationGrantTypeDocMapper {
 
     @Override
-    public AuthorizationGrantType toEntity(AuthorizationGrantTypeDocument document) {
+    public AuthorizationGrantType toModel(AuthorizationGrantTypeEntity document) {
         if ( document == null ) {
             return null;
         }
@@ -31,43 +31,43 @@ public class AuthorizationGrantTypeDocMapperImpl implements AuthorizationGrantTy
     }
 
     @Override
-    public AuthorizationGrantTypeDocument toDocument(AuthorizationGrantType entity) {
+    public AuthorizationGrantTypeEntity toEntity(AuthorizationGrantType entity) {
         if ( entity == null ) {
             return null;
         }
 
-        AuthorizationGrantTypeDocument.AuthorizationGrantTypeDocumentBuilder authorizationGrantTypeDocument = AuthorizationGrantTypeDocument.builder();
+        AuthorizationGrantTypeEntity.AuthorizationGrantTypeEntityBuilder authorizationGrantTypeEntity = AuthorizationGrantTypeEntity.builder();
 
-        authorizationGrantTypeDocument.id( entity.getId() );
-        authorizationGrantTypeDocument.value( entity.getValue() );
-        authorizationGrantTypeDocument.description( entity.getDescription() );
+        authorizationGrantTypeEntity.id( entity.getId() );
+        authorizationGrantTypeEntity.value( entity.getValue() );
+        authorizationGrantTypeEntity.description( entity.getDescription() );
 
-        return authorizationGrantTypeDocument.build();
+        return authorizationGrantTypeEntity.build();
     }
 
     @Override
-    public List<AuthorizationGrantType> toEntityList(List<AuthorizationGrantTypeDocument> documents) {
+    public List<AuthorizationGrantType> toModelList(List<AuthorizationGrantTypeEntity> documents) {
         if ( documents == null ) {
             return null;
         }
 
         List<AuthorizationGrantType> list = new ArrayList<AuthorizationGrantType>( documents.size() );
-        for ( AuthorizationGrantTypeDocument authorizationGrantTypeDocument : documents ) {
-            list.add( toEntity( authorizationGrantTypeDocument ) );
+        for ( AuthorizationGrantTypeEntity authorizationGrantTypeEntity : documents ) {
+            list.add( toModel( authorizationGrantTypeEntity ) );
         }
 
         return list;
     }
 
     @Override
-    public List<AuthorizationGrantTypeDocument> toDocumentList(List<AuthorizationGrantType> entities) {
+    public List<AuthorizationGrantTypeEntity> toEntityList(List<AuthorizationGrantType> entities) {
         if ( entities == null ) {
             return null;
         }
 
-        List<AuthorizationGrantTypeDocument> list = new ArrayList<AuthorizationGrantTypeDocument>( entities.size() );
+        List<AuthorizationGrantTypeEntity> list = new ArrayList<AuthorizationGrantTypeEntity>( entities.size() );
         for ( AuthorizationGrantType authorizationGrantType : entities ) {
-            list.add( toDocument( authorizationGrantType ) );
+            list.add( toEntity( authorizationGrantType ) );
         }
 
         return list;

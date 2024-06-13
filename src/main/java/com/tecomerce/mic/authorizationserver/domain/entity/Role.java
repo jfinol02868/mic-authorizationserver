@@ -1,27 +1,23 @@
 package com.tecomerce.mic.authorizationserver.domain.entity;
 
-import com.tecomerce.mic.authorizationserver.domain.enums.RoleName;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 
-@Data
+import java.util.List;
+
+@Setter
+@Getter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class Role implements GrantedAuthority {
 
     private String id;
-
-    @Enumerated(EnumType.STRING)
-    private RoleName role;
+    private String roleName;
+    private List<User> users;
 
     @Override
     public String getAuthority() {
-        return role.name();
+        return this.roleName;
     }
 }

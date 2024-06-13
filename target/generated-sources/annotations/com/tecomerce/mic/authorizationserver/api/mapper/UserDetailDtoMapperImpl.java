@@ -4,7 +4,6 @@ import com.tecomerce.mic.authorizationserver.api.service.dto.RoleDTO;
 import com.tecomerce.mic.authorizationserver.api.service.dto.UserDetailDTO;
 import com.tecomerce.mic.authorizationserver.domain.entity.Role;
 import com.tecomerce.mic.authorizationserver.domain.entity.UserDetail;
-import com.tecomerce.mic.authorizationserver.domain.enums.RoleName;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.processing.Generated;
@@ -12,7 +11,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-06-10T14:53:43+0200",
+    date = "2024-06-13T11:24:40+0200",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 17.0.11 (Eclipse Adoptium)"
 )
 @Component
@@ -94,9 +93,7 @@ public class UserDetailDtoMapperImpl implements UserDetailDtoMapper {
         Role.RoleBuilder role = Role.builder();
 
         role.id( roleDTO.getId() );
-        if ( roleDTO.getRole() != null ) {
-            role.role( Enum.valueOf( RoleName.class, roleDTO.getRole() ) );
-        }
+        role.roleName( roleDTO.getRoleName() );
 
         return role.build();
     }
@@ -122,9 +119,7 @@ public class UserDetailDtoMapperImpl implements UserDetailDtoMapper {
         RoleDTO.RoleDTOBuilder roleDTO = RoleDTO.builder();
 
         roleDTO.id( role.getId() );
-        if ( role.getRole() != null ) {
-            roleDTO.role( role.getRole().name() );
-        }
+        roleDTO.roleName( role.getRoleName() );
 
         return roleDTO.build();
     }

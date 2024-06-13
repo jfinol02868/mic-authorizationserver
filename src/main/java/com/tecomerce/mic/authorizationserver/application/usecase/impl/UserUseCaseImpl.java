@@ -1,31 +1,33 @@
 package com.tecomerce.mic.authorizationserver.application.usecase.impl;
 
-import com.tecomerce.mic.authorizationserver.application.usecase.UserDetailUseCase;
 import com.tecomerce.mic.authorizationserver.application.usecase.UserUseCase;
 import com.tecomerce.mic.authorizationserver.domain.entity.User;
-import com.tecomerce.mic.authorizationserver.domain.entity.UserDetail;
-import com.tecomerce.mic.authorizationserver.domain.repository.UserDetailRepository;
+import com.tecomerce.mic.authorizationserver.domain.repository.RoleRepository;
 import com.tecomerce.mic.authorizationserver.domain.repository.UserRepository;
 import com.tecomerce.mic.authorizationserver.domain.util.MapperUtil;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
-public class UserUseCaseImpl implements UserUseCase, UserDetailUseCase {
+public class UserUseCaseImpl implements UserUseCase, UserDetailsService {
 
     private final MapperUtil filters;
     private final UserRepository repository;
+    private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
-    private final UserDetailRepository uDRepository;
-
 
     @Override
+    @Transactional
     public User create(User entity) {
-        entity.trimPassword();
         entity.setPassword(passwordEncoder.encode(entity.getPassword()));
         return repository.create(entity);
     }
@@ -33,16 +35,18 @@ public class UserUseCaseImpl implements UserUseCase, UserDetailUseCase {
     @Override
     public List<User> createAll(List<User> entities) {
         entities.forEach(e -> {
-                    e.trimPassword();
-                    e.setPassword(passwordEncoder.encode(e.getPassword()));
-                });
+            e.setPassword(passwordEncoder.encode(e.getPassword().trim()));
+            e.setRoles(e.getRoles().stream()
+                    .map(r -> roleRepository.findById(r.getId()))
+                    .collect(Collectors.toList()));
+        });
         return repository.createAll(entities);
     }
 
     @Override
     public User update(User entity, String id) {
         entity.trimPassword();
-        entity.setPassword(passwordEncoder.encode(entity.getPassword()));
+        entity.setPassword(entity.getPassword());
         return repository.update(entity, id);
     }
 
@@ -50,7 +54,7 @@ public class UserUseCaseImpl implements UserUseCase, UserDetailUseCase {
     public List<User> updateAll(List<User> entities) {
         entities.forEach(e -> {
             e.trimPassword();
-            e.setPassword(passwordEncoder.encode(e.getPassword()));
+            e.setPassword(e.getPassword());
         });
         return repository.updateAll(entities);
     }
@@ -87,7 +91,8 @@ public class UserUseCaseImpl implements UserUseCase, UserDetailUseCase {
     }
 
     @Override
-    public UserDetail findByUsername(String username) {
-        return uDRepository.findByUsername(username);
+    @Transactional
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return repository.findByUsername(username);
     }
 }

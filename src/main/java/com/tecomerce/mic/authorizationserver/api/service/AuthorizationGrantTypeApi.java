@@ -17,7 +17,7 @@ import java.util.List;
 
 public interface AuthorizationGrantTypeApi {
 
-    static final String MEDIA_TYPE = "application/json";
+    final String MEDIA_TYPE = "application/json";
 
     @PostMapping
     @Operation( operationId = "creation-authorizationGrantType", description = "Creation of authorization grant type.")
@@ -131,11 +131,11 @@ public interface AuthorizationGrantTypeApi {
     @ApiResponse(responseCode = "403", content = @Content(mediaType = MEDIA_TYPE,  schema = @Schema(implementation = MessageResponseDTO.class)))
     @ApiResponse(responseCode = "500", content = @Content(mediaType = MEDIA_TYPE,  schema = @Schema(implementation = MessageResponseDTO.class)))
     default ResponseEntity<List<AuthorizationGrantTypeDTO>> filters(
-            @RequestParam(required = false, defaultValue = "{\"name\":\"admin\"}") String filterProperties,
+            @RequestParam(required = false, defaultValue = "{\"value\":\"authorization_code\"}") String filterProperties,
             @RequestParam(required = false, defaultValue = "0") int page,
             @RequestParam(required = false, defaultValue = "9") int size,
             @RequestParam(required = false) SortEnumDTO direction,
-            @RequestParam(required = false, defaultValue = "name") String... sortProperties) {
+            @RequestParam(required = false, defaultValue = "value") String... sortProperties) {
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
     }
 }
