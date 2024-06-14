@@ -17,10 +17,9 @@ public class Client {
     private String id;
     private String clientId;
     private String clientSecret;
-    private List<String> authenticationMethods;
-    private List<String> authorizationGrantTypes;
-    private List<String> redirectUris;
-    private List<String> scopes;
-    private Boolean requireProofKey;
+    private List<ClientAuthenticationMethod> authenticationMethods;
+    private List<AuthorizationGrantType> authorizationGrantTypes;
+    private List<RedirectUri> redirectUris;
+    private List<Scope> scopes;
 
 }

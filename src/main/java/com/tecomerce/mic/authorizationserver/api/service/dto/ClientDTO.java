@@ -28,8 +28,6 @@ public class ClientDTO {
     @Schema(description = "Redirect Uris", example = "[\"AUTHORIZATION::REDIRECTURI::8E13F0AA-BF62-4E32-B49E-9CD8FE768636::DES\"]")
     private List<String> redirectUris;
     @Schema(description = "Scopes", example = "[\"AUTHORIZATION::SCOPE::901ED8FD-55B6-4087-9BC1-DF3788F72714::DES\"]")
-    private List<String> scopes;
-    @Schema(description = "Require Proof Key", example = "false")
-    private Boolean requireProofKey;
+    private List<String> scopes;;
 
 }

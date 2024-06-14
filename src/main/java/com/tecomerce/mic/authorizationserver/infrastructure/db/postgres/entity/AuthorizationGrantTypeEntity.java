@@ -1,12 +1,13 @@
 package com.tecomerce.mic.authorizationserver.infrastructure.db.postgres.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.ManyToMany;
+import lombok.*;
 import org.springframework.data.annotation.TypeAlias;
+
+import java.util.List;
 
 @Data
 @Builder
@@ -20,4 +21,9 @@ public class AuthorizationGrantTypeEntity {
         private String id;
         private String value;
         private String description;
+        @ManyToMany
+        @ToString.Exclude
+        @EqualsAndHashCode.Exclude
+        @JsonIgnore
+        private List<ClientEntity> clients;
 }

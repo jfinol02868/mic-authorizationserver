@@ -1,12 +1,8 @@
 package com.tecomerce.mic.authorizationserver.infrastructure.db.postgres.entity;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.*;
+import lombok.*;
 import org.springframework.data.annotation.TypeAlias;
 
 import java.util.List;
@@ -23,10 +19,44 @@ public class ClientEntity {
     private String id;
     private String clientId;
     private String clientSecret;
-    private List<String> authenticationMethods;
-    private List<String> authorizationGrantTypes;
-    private List<String> redirectUris;
-    private List<String> scopes;
-    private Boolean requireProofKey;
 
+    @ManyToMany
+    @JoinTable(
+            name = "client_authentication_methods",
+            joinColumns = @JoinColumn(name = "client_id"),
+            inverseJoinColumns = @JoinColumn(name = "authentication_id")
+    )
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    private List<ClientAuthenticationMethodEntity> authenticationMethods;
+
+    @ManyToMany
+    @JoinTable(
+            name = "client_authorization_grant_types",
+            joinColumns = @JoinColumn(name = "client_id"),
+            inverseJoinColumns = @JoinColumn(name = "authorization_id")
+    )
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    private List<AuthorizationGrantTypeEntity> authorizationGrantTypes;
+
+    @ManyToMany
+    @JoinTable(
+            name = "client_redirect_uris",
+            joinColumns = @JoinColumn(name = "client_id"),
+            inverseJoinColumns = @JoinColumn(name = "redirecturi_id")
+    )
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    private List<RedirectUriEntity> redirectUris;
+
+    @ManyToMany
+    @JoinTable(
+            name = "client_scopes",
+            joinColumns = @JoinColumn(name = "client_id"),
+            inverseJoinColumns = @JoinColumn(name = "scopes_id")
+    )
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    private List<ScopeEntity> scopes;
 }

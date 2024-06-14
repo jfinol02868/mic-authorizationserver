@@ -1,11 +1,12 @@
 package com.tecomerce.mic.authorizationserver.application.usecase.impl;
 
 import com.tecomerce.mic.authorizationserver.application.usecase.ClientUseCase;
-import com.tecomerce.mic.authorizationserver.domain.entity.Client;
+import com.tecomerce.mic.authorizationserver.domain.entity.*;
 import com.tecomerce.mic.authorizationserver.domain.repository.*;
 import com.tecomerce.mic.authorizationserver.domain.util.MapperUtil;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,6 +19,7 @@ public class ClientUseCaseImpl implements ClientUseCase {
     private final MapperUtil filters;
     private final ClientRepository repository;
     private final ScopeRepository sRepository;
+    private final PasswordEncoder passwordEncoder;
     private final RedirectUriRepository rURepository;
     private final AuthorizationGrantTypeRepository aGTRepository;
     private final ClientAuthenticationMethodRepository cAMRepository;
@@ -25,25 +27,38 @@ public class ClientUseCaseImpl implements ClientUseCase {
     @Override
     @Transactional
     public Client create(Client entity) {
-       this.validateClient(entity);
+
+        List<Scope> scopes = sRepository.findByIds(entity.getScopes()
+                .stream().map(Scope::getId).collect(Collectors.toList()));
+
+        List<RedirectUri> redirectUris = rURepository.findByIds(entity.getRedirectUris()
+                .stream().map(RedirectUri::getId).collect(Collectors.toList()));
+
+        List<ClientAuthenticationMethod> authenticationMethods = cAMRepository.findByIds(entity.getAuthenticationMethods()
+                .stream().map(ClientAuthenticationMethod::getId).collect(Collectors.toList()));
+
+        List<AuthorizationGrantType> authorizationGrantTypes = aGTRepository.findByIds(entity.getAuthorizationGrantTypes()
+                .stream().map(AuthorizationGrantType::getId).collect(Collectors.toList()));
+
+        entity.setScopes(scopes);
+        entity.setRedirectUris(redirectUris);
+        entity.setClientSecret(passwordEncoder.encode(entity.getClientSecret()));
+        entity.setAuthenticationMethods(authenticationMethods);
+        entity.setAuthorizationGrantTypes(authorizationGrantTypes);
         return repository.create(entity);
     }
 
     @Override
     @Transactional
     public List<Client> createAll(List<Client> entities) {
-        List<Client> entitiesValidated = entities
-                .stream()
-                .peek(this::validateClient)
-                .collect(Collectors.toList());
-        return repository.createAll(entitiesValidated);
+        return repository.createAll(entities);
     }
 
     @Override
     @Transactional
     public Client update(Client entity, String id) {
         Client client = repository.findById(id);
-        this.validateClient(client);
+        //this.validateClient(client);
         return repository.update(entity, id);
     }
 
@@ -54,16 +69,8 @@ public class ClientUseCaseImpl implements ClientUseCase {
                 .stream()
                 .peek(entity -> {
                     Client client = repository.findById(entity.getId());
-                    this.validateClient(client);
         }).collect(Collectors.toList());
         return repository.updateAll(entitiesValidated);
-    }
-
-    private void validateClient(Client entity) {
-        entity.getAuthenticationMethods().forEach(cAMRepository::findById);
-        entity.getAuthorizationGrantTypes().forEach(aGTRepository::findById);
-        entity.getRedirectUris().forEach(rURepository::findById);
-        entity.getScopes().forEach(sRepository::findById);
     }
 
     @Override

@@ -1,23 +1,27 @@
 package com.tecomerce.mic.authorizationserver.infrastructure.db.postgres.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
+import lombok.*;
 import org.springframework.data.annotation.TypeAlias;
+
+import java.util.List;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@TypeAlias("clientAuthenticationMethod")
-@Entity(name = "client_authentication_methods")
+@TypeAlias("AuthenticationMethod")
+@Entity(name = "authentication_methods")
 public class ClientAuthenticationMethodEntity {
 
         @Id
         private String id;
         private String value;
         private String description;
+        @ManyToMany
+        @ToString.Exclude
+        @EqualsAndHashCode.Exclude
+        @JsonIgnore
+        private List<ClientEntity> clients;
 }

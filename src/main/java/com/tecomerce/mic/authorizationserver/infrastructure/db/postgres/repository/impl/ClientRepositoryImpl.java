@@ -28,9 +28,9 @@ public class ClientRepositoryImpl implements ClientRepository {
     private final IdGenerator idGenerator;
     private final ClientRepositoryAdapter repository;
 
-
     @Override
     public Client create(Client entity) {
+
         if (Objects.isNull(entity.getId())) entity.setId(idGenerator.generateId(ClientEntity.class));
         return mapper.toModel(repository.save(mapper.toEntity(entity)));
     }
