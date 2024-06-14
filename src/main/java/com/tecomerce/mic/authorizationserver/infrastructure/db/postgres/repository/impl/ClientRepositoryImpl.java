@@ -105,4 +105,11 @@ public class ClientRepositoryImpl implements ClientRepository {
         Page<ClientEntity> result = repository.findAll(spec, pageable);
         return mapper.toModelList(result.getContent());
     }
+
+    @Override
+    public Client findByClientId(String clientId) {
+        return repository.findByClientId(clientId)
+                .map(mapper::toModel)
+                .orElseThrow(() -> new EntityNotFoundException(clientId));
+    }
 }

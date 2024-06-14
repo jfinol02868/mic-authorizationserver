@@ -46,3 +46,4 @@ logging:
 app:
   environment: DES
   micro: AUTHORIZATION
+  issuer: http://localhost:9000

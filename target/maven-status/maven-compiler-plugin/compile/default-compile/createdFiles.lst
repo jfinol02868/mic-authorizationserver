@@ -109,6 +109,7 @@ com\tecomerce\mic\authorizationserver\application\usecase\BaseUseCase.class
 com\tecomerce\mic\authorizationserver\domain\entity\AuthorizationGrantType$AuthorizationGrantTypeBuilder.class
 com\tecomerce\mic\authorizationserver\domain\exception\EntityNotFoundException.class
 com\tecomerce\mic\authorizationserver\api\service\dto\AuthorizationGrantTypeDTO$AuthorizationGrantTypeDTOBuilder.class
+com\tecomerce\mic\authorizationserver\application\usecase\impl\ClientService.class
 com\tecomerce\mic\authorizationserver\infrastructure\db\postgres\repository\AuthorizationGrantTypeRepositoryAdapter.class
 com\tecomerce\mic\authorizationserver\api\service\ScopeApi.class
 com\tecomerce\mic\authorizationserver\infrastructure\db\mapper\RedirectUriDocMapperImpl.class

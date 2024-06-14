@@ -6,9 +6,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-@OpenAPIDefinition(servers = {
-		@Server(url = "https://mic-authorizationserver-production.up.railway.app/")
-})
+//@OpenAPIDefinition(servers = {
+//		@Server(url = "https://mic-authorizationserver-production.up.railway.app/")
+//})
 public class MicAuthorizationserverApplication {
 
 	public static void main(String[] args) {

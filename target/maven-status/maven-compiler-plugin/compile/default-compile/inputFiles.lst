@@ -63,6 +63,7 @@ C:\dev\mic-authorizationserver\src\main\java\com\tecomerce\mic\authorizationserv
 C:\dev\mic-authorizationserver\src\main\java\com\tecomerce\mic\authorizationserver\domain\exception\ErrorMappingException.java
 C:\dev\mic-authorizationserver\src\main\java\com\tecomerce\mic\authorizationserver\infrastructure\db\postgres\entity\RoleEntity.java
 C:\dev\mic-authorizationserver\src\main\java\com\tecomerce\mic\authorizationserver\domain\repository\RedirectUriRepository.java
+C:\dev\mic-authorizationserver\src\main\java\com\tecomerce\mic\authorizationserver\application\usecase\impl\ClientService.java
 C:\dev\mic-authorizationserver\src\main\java\com\tecomerce\mic\authorizationserver\infrastructure\db\postgres\repository\ClientAuthenticationMethodRepositoryAdapter.java
 C:\dev\mic-authorizationserver\src\main\java\com\tecomerce\mic\authorizationserver\domain\entity\User.java
 C:\dev\mic-authorizationserver\src\main\java\com\tecomerce\mic\authorizationserver\domain\repository\UserRepository.java
