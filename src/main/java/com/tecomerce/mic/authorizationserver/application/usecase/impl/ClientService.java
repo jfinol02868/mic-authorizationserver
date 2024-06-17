@@ -27,13 +27,16 @@ public class ClientService implements RegisteredClientRepository {
     @Override
     public void save(RegisteredClient registeredClient) { }
 
+    public void delete(String id) {
+        clientRepository.deleteById(id);
+    }
+
     public void create(ClientDTO dto){
         if (Objects.isNull(dto.getId())) dto.setId(idGenerator.generateId(ClientEntity.class));
         dto.setClientSecret(passwordEncoder.encode(dto.getClientSecret()));
         ClientEntity client = clientFromDto(dto);
         clientRepository.save(client);
     }
-
 
     @Override
     public RegisteredClient findById(String id) {
