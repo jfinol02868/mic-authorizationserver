@@ -10,23 +10,28 @@ import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
-import org.springframework.http.MediaType;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configurers.oauth2.server.resource.OAuth2ResourceServerConfigurer;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.server.authorization.config.annotation.web.configuration.OAuth2AuthorizationServerConfiguration;
 import org.springframework.security.oauth2.server.authorization.config.annotation.web.configurers.OAuth2AuthorizationServerConfigurer;
 import org.springframework.security.oauth2.server.authorization.settings.AuthorizationServerSettings;
+import org.springframework.security.oauth2.server.authorization.token.JwtEncodingContext;
+import org.springframework.security.oauth2.server.authorization.token.OAuth2TokenCustomizer;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-import org.springframework.security.web.util.matcher.MediaTypeRequestMatcher;
 
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
 import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
+import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Configuration
 @AllArgsConstructor
@@ -39,11 +44,9 @@ public class SecurityConfig {
     public SecurityFilterChain authorizationServerSecurityFilterChain(HttpSecurity http) throws Exception {
         OAuth2AuthorizationServerConfiguration.applyDefaultSecurity(http);
         http.getConfigurer(OAuth2AuthorizationServerConfigurer.class).oidc(Customizer.withDefaults());
-        http.exceptionHandling(exceptions -> exceptions.defaultAuthenticationEntryPointFor(
-                                new LoginUrlAuthenticationEntryPoint("/login"),
-                                new MediaTypeRequestMatcher(MediaType.TEXT_HTML)
-                        )
-        ).oauth2ResourceServer(resourceServer -> resourceServer.jwt(Customizer.withDefaults()));
+        http.exceptionHandling(exception -> exception
+                        .authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/login")))
+                .oauth2ResourceServer(OAuth2ResourceServerConfigurer::disable);
         return http.build();
     }
 
@@ -64,10 +67,12 @@ public class SecurityConfig {
 
 //    @Bean
 //    public RegisteredClientRepository registeredClientRepository() {
+//
 //        RegisteredClient oidcClient = RegisteredClient.withId(UUID.randomUUID().toString())
 //                .clientId("client")
 //                .clientSecret("{noop}secret")
-//                .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
+//                //.clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
+//                .clientAuthenticationMethod(new ClientAuthenticationMethod("client_secret_basic"))
 //                .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
 //                .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
 //                .redirectUri("https://oauthdebugger.com/debug")
@@ -78,6 +83,21 @@ public class SecurityConfig {
 //
 //        return new InMemoryRegisteredClientRepository(oidcClient);
 //    }
+
+    @Bean
+    public OAuth2TokenCustomizer<JwtEncodingContext> tokenCustomizer(){
+        return context -> {
+            Authentication principal = context.getPrincipal();
+            if(context.getTokenType().getValue().equals("id_token")){
+                context.getClaims().claim("token_type", "id token");
+            }
+            if(context.getTokenType().getValue().equals("access_token")){
+                context.getClaims().claim("token_type", "access token");
+                Set<String> roles = principal.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toSet());
+                context.getClaims().claim("roles", roles).claim("username", principal.getName());
+            }
+        };
+    }
 
     @Bean
     public JWKSource<SecurityContext> jwkSource() {

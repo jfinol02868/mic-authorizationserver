@@ -1,11 +1,22 @@
 package com.tecomerce.mic.authorizationserver.infrastructure.db.postgres.entity;
 
 
-import jakarta.persistence.*;
-import lombok.*;
+import jakarta.persistence.ElementCollection;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.Id;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.TypeAlias;
+import org.springframework.security.oauth2.core.AuthorizationGrantType;
+import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
+import org.springframework.security.oauth2.server.authorization.client.RegisteredClient;
+import org.springframework.security.oauth2.server.authorization.settings.ClientSettings;
 
-import java.util.List;
+import java.util.Date;
+import java.util.Set;
 
 @Data
 @Builder
@@ -19,44 +30,30 @@ public class ClientEntity {
     private String id;
     private String clientId;
     private String clientSecret;
+    @ElementCollection(fetch = FetchType.EAGER)
+    private Set<ClientAuthenticationMethod> authenticationMethods;
+    @ElementCollection(fetch = FetchType.EAGER)
+    private Set<AuthorizationGrantType> authorizationGrantTypes;
+    @ElementCollection(fetch = FetchType.EAGER)
+    private Set<String> redirectUris;
+    @ElementCollection(fetch = FetchType.EAGER)
+    private Set<String> scopes;
+    private boolean requireProofKey;
 
-    @ManyToMany
-    @JoinTable(
-            name = "client_authentication_methods",
-            joinColumns = @JoinColumn(name = "client_id"),
-            inverseJoinColumns = @JoinColumn(name = "authentication_id")
-    )
-    @ToString.Exclude
-    @EqualsAndHashCode.Exclude
-    private List<ClientAuthenticationMethodEntity> authenticationMethods;
-
-    @ManyToMany
-    @JoinTable(
-            name = "client_authorization_grant_types",
-            joinColumns = @JoinColumn(name = "client_id"),
-            inverseJoinColumns = @JoinColumn(name = "authorization_id")
-    )
-    @ToString.Exclude
-    @EqualsAndHashCode.Exclude
-    private List<AuthorizationGrantTypeEntity> authorizationGrantTypes;
-
-    @ManyToMany
-    @JoinTable(
-            name = "client_redirect_uris",
-            joinColumns = @JoinColumn(name = "client_id"),
-            inverseJoinColumns = @JoinColumn(name = "redirecturi_id")
-    )
-    @ToString.Exclude
-    @EqualsAndHashCode.Exclude
-    private List<RedirectUriEntity> redirectUris;
-
-    @ManyToMany
-    @JoinTable(
-            name = "client_scopes",
-            joinColumns = @JoinColumn(name = "client_id"),
-            inverseJoinColumns = @JoinColumn(name = "scopes_id")
-    )
-    @ToString.Exclude
-    @EqualsAndHashCode.Exclude
-    private List<ScopeEntity> scopes;
+    public static RegisteredClient toRegisteredClient(ClientEntity client){
+        RegisteredClient.Builder builder = RegisteredClient.withId(client.getClientId())
+                .clientId(client.getClientId())
+                .clientSecret(client.getClientSecret())
+                .clientIdIssuedAt(new Date().toInstant())
+                .clientAuthenticationMethods(am -> am.addAll(client.getAuthenticationMethods()))
+                .authorizationGrantTypes(agt -> agt.addAll(client.getAuthorizationGrantTypes()))
+                .redirectUris(ru -> ru.addAll(client.getRedirectUris()))
+                .scopes(sc -> sc.addAll(client.getScopes()))
+                .clientSettings(ClientSettings
+                        .builder()
+                        .requireProofKey(client.isRequireProofKey())
+                        .requireAuthorizationConsent(true)
+                        .build());
+        return builder.build();
+    }
 }

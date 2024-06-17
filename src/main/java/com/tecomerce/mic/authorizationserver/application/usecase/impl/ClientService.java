@@ -1,85 +1,112 @@
 package com.tecomerce.mic.authorizationserver.application.usecase.impl;
 
-import com.tecomerce.mic.authorizationserver.domain.entity.Client;
-import com.tecomerce.mic.authorizationserver.domain.entity.ClientAuthenticationMethod;
-import com.tecomerce.mic.authorizationserver.domain.entity.RedirectUri;
-import com.tecomerce.mic.authorizationserver.domain.entity.Scope;
-import com.tecomerce.mic.authorizationserver.domain.repository.ClientRepository;
-import lombok.AllArgsConstructor;
+import com.tecomerce.mic.authorizationserver.api.service.dto.ClientDTO;
+import com.tecomerce.mic.authorizationserver.infrastructure.db.postgres.entity.ClientEntity;
+import com.tecomerce.mic.authorizationserver.infrastructure.db.postgres.repository.JpaClientRepository;
+import com.tecomerce.mic.authorizationserver.infrastructure.util.IdGenerator;
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
+import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClient;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClientRepository;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 
+import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Service
-@AllArgsConstructor
-public class ClientService implements RegisteredClientRepository  {
+@RequiredArgsConstructor
+public class ClientService implements RegisteredClientRepository {
 
-    private final ClientRepository clientRepository;
+    private final JpaClientRepository clientRepository;
+    private final PasswordEncoder passwordEncoder;
+    private final IdGenerator idGenerator;
 
     @Override
-    public void save(RegisteredClient registeredClient) {
+    public void save(RegisteredClient registeredClient) { }
 
+    public void create(ClientDTO dto){
+        if (Objects.isNull(dto.getId())) dto.setId(idGenerator.generateId(ClientEntity.class));
+        dto.setClientSecret(passwordEncoder.encode(dto.getClientSecret()));
+        ClientEntity client = clientFromDto(dto);
+        clientRepository.save(client);
     }
+
 
     @Override
     public RegisteredClient findById(String id) {
-        return this.toRegisteredClient(clientRepository.findByClientId(id));
+        ClientEntity client = clientRepository.findByClientId(id).orElseThrow( () -> new RuntimeException("Client not found"));
+        return ClientEntity.toRegisteredClient(client);
     }
 
     @Override
     public RegisteredClient findByClientId(String clientId) {
-        return this.toRegisteredClient(clientRepository.findByClientId(clientId));
+        ClientEntity client = clientRepository.findByClientId(clientId).orElseThrow( () -> new RuntimeException("Client not found"));
+        return ClientEntity.toRegisteredClient(client);
     }
 
-    private RegisteredClient toRegisteredClient(Client client) {
+    private ClientEntity clientFromDto(ClientDTO dto){
 
-        Set<String> clientAuthenticationMethods = StringUtils.commaDelimitedListToSet(client.getAuthenticationMethods().stream()
-                .map(ClientAuthenticationMethod::getValue).collect(Collectors.joining(",")));
+        Set<ClientAuthenticationMethod> authenticationMethods = new HashSet<>();
+        dto.getAuthenticationMethods().forEach(method -> {
+            if(method.equals(ClientAuthenticationMethod.CLIENT_SECRET_BASIC.getValue())){
+                authenticationMethods.add(ClientAuthenticationMethod.CLIENT_SECRET_BASIC);
+            }
+            if(method.equals(ClientAuthenticationMethod.CLIENT_SECRET_JWT.getValue())){
+                authenticationMethods.add(ClientAuthenticationMethod.CLIENT_SECRET_JWT);
+            }
+            if(method.equals(ClientAuthenticationMethod.CLIENT_SECRET_POST.getValue())){
+                authenticationMethods.add(ClientAuthenticationMethod.CLIENT_SECRET_POST);
+            }
+            if(method.equals(ClientAuthenticationMethod.NONE.getValue())){
+                authenticationMethods.add(ClientAuthenticationMethod.NONE);
+            }
+            if(method.equals(ClientAuthenticationMethod.TLS_CLIENT_AUTH.getValue())){
+                authenticationMethods.add(ClientAuthenticationMethod.TLS_CLIENT_AUTH);
+            }
+            if(method.equals(ClientAuthenticationMethod.SELF_SIGNED_TLS_CLIENT_AUTH.getValue())){
+                authenticationMethods.add(ClientAuthenticationMethod.SELF_SIGNED_TLS_CLIENT_AUTH);
+            }
+            if(method.equals(ClientAuthenticationMethod.PRIVATE_KEY_JWT.getValue())){
+                authenticationMethods.add(ClientAuthenticationMethod.PRIVATE_KEY_JWT);
+            }
+        });
 
-        Set<String> authorizationGrantTypes = StringUtils.commaDelimitedListToSet(client.getAuthorizationGrantTypes().stream()
-                .map(com.tecomerce.mic.authorizationserver.domain.entity.AuthorizationGrantType::getValue).collect(Collectors.joining(",")));
+        Set<AuthorizationGrantType> authorizationGrantTypes = new HashSet<>();
+        dto.getAuthorizationGrantTypes().forEach(type -> {
+            if(type.equals(AuthorizationGrantType.AUTHORIZATION_CODE.getValue())){
+                authorizationGrantTypes.add(AuthorizationGrantType.AUTHORIZATION_CODE);
+            }
+            if(type.equals(AuthorizationGrantType.CLIENT_CREDENTIALS.getValue())){
+                authorizationGrantTypes.add(AuthorizationGrantType.CLIENT_CREDENTIALS);
+            }
+            if(type.equals(AuthorizationGrantType.REFRESH_TOKEN.getValue())){
+                authorizationGrantTypes.add(AuthorizationGrantType.REFRESH_TOKEN);
+            }
+            if(type.equals(AuthorizationGrantType.JWT_BEARER.getValue())){
+                authorizationGrantTypes.add(AuthorizationGrantType.JWT_BEARER);
+            }
+            if(type.equals(AuthorizationGrantType.DEVICE_CODE.getValue())){
+                authorizationGrantTypes.add(AuthorizationGrantType.DEVICE_CODE);
+            }
+            if(type.equals(AuthorizationGrantType.TOKEN_EXCHANGE.getValue())){
+                authorizationGrantTypes.add(AuthorizationGrantType.TOKEN_EXCHANGE);
+            }
+        });
 
-        Set<String> redirectUris = StringUtils.commaDelimitedListToSet(client.getRedirectUris().stream()
-                .map(RedirectUri::getUri).collect(Collectors.joining(",")));
+        authorizationGrantTypes.add(AuthorizationGrantType.AUTHORIZATION_CODE);
 
-        Set<String> clientScopes = StringUtils.commaDelimitedListToSet(client.getScopes().stream()
-                .map(Scope::getName).collect(Collectors.joining(",")));
-
-        RegisteredClient.Builder builder = RegisteredClient.withId(client.getId())
-                .clientId(client.getClientId())
-                .clientSecret(client.getClientSecret())
-                .clientAuthenticationMethods(methods -> clientAuthenticationMethods.forEach(method -> methods.add(resolveClientAuthenticationMethod(method))))
-                .authorizationGrantTypes((grantTypes) -> authorizationGrantTypes.forEach(grantType -> grantTypes.add(resolveAuthorizationGrantType(grantType))))
-                .redirectUris((uris) -> uris.addAll(redirectUris))
-                .scopes((scopes) -> scopes.addAll(clientScopes));
-        return builder.build();
+        return ClientEntity.builder()
+                .id(dto.getId())
+                .clientId(dto.getClientId())
+                .clientSecret(passwordEncoder.encode(dto.getClientSecret()))
+                .authenticationMethods(authenticationMethods)
+                .authorizationGrantTypes(authorizationGrantTypes)
+                .redirectUris(dto.getRedirectUris())
+                .scopes(dto.getScopes())
+                .requireProofKey(dto.isRequireProofKey())
+                .build();
     }
-
-    private static AuthorizationGrantType resolveAuthorizationGrantType(String authorizationGrantType) {
-        if (AuthorizationGrantType.AUTHORIZATION_CODE.getValue().equals(authorizationGrantType)) {
-            return AuthorizationGrantType.AUTHORIZATION_CODE;
-        } else if (AuthorizationGrantType.CLIENT_CREDENTIALS.getValue().equals(authorizationGrantType)) {
-            return AuthorizationGrantType.CLIENT_CREDENTIALS;
-        } else if (AuthorizationGrantType.REFRESH_TOKEN.getValue().equals(authorizationGrantType)) {
-            return AuthorizationGrantType.REFRESH_TOKEN;
-        }
-        return new AuthorizationGrantType(authorizationGrantType);
-    }
-
-    private static org.springframework.security.oauth2.core.ClientAuthenticationMethod resolveClientAuthenticationMethod(String clientAuthenticationMethod) {
-        if (org.springframework.security.oauth2.core.ClientAuthenticationMethod.CLIENT_SECRET_BASIC.getValue().equals(clientAuthenticationMethod)) {
-            return org.springframework.security.oauth2.core.ClientAuthenticationMethod.CLIENT_SECRET_BASIC;
-        } else if (org.springframework.security.oauth2.core.ClientAuthenticationMethod.CLIENT_SECRET_POST.getValue().equals(clientAuthenticationMethod)) {
-            return org.springframework.security.oauth2.core.ClientAuthenticationMethod.CLIENT_SECRET_POST;
-        } else if (org.springframework.security.oauth2.core.ClientAuthenticationMethod.NONE.getValue().equals(clientAuthenticationMethod)) {
-            return org.springframework.security.oauth2.core.ClientAuthenticationMethod.NONE;
-        }
-        return new org.springframework.security.oauth2.core.ClientAuthenticationMethod(clientAuthenticationMethod);
-    }
-
 }
